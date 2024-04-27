@@ -1,0 +1,13 @@
+{
+  "version": {
+    "minor": 0,
+    "build": 1,
+    "patch": 1,
+    "major": 0
+  },
+  "appname": "magic-apps",
+  "dnsprod": "apps.intra.nexigroup.com",
+  "dnstest": "apps-test.intra.nexigroup.com",
+  "imagename": "ghcr.io/magicbutton/magic-apps",
+  "port": 4341
+}

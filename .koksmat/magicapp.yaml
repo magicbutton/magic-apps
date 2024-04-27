@@ -1,0 +1,215 @@
+name: apps
+type: magicservice
+namespace: apps
+organisation: magicbutton
+magicappversion: v0.0.1
+description: A simple app to manage users, groups and memberships
+
+baseattributes:
+  urlrecord:
+    &recordAttributesWithURL # Id + Created + Updated + CreatedBy + UpdatedBy are implicit
+    - name: tenant
+      type: string
+      required: true
+    - name: name
+      type: string
+      required: true
+    - name: description
+      type: string
+      required: false
+    - name: url
+      type: string
+      required: true
+  record:
+    &recordAttributes # Id + Created + Updated + CreatedBy + UpdatedBy are implicit
+    - name: tenant
+      type: string
+      required: true
+    - name: name
+      type: string
+      required: true
+    - name: description
+      type: string
+      required: false
+
+entities:
+  person: &person
+    name: person
+    description: person
+    baselineattributes: *recordAttributes
+    additionalattributes:
+      - name: displayname
+        type: string
+        required: true
+      - name: email
+        type: string
+        required: true
+  application: &application
+    name: application
+    baselineattributes: *recordAttributes
+    additionalattributes:
+      - name: key
+        type: string
+        required: true
+      - name: displayname
+        type: string
+        required: true
+      - name: owner
+        required: false
+        type: reference
+        entity: *person
+  campaign: &campaign
+    name: campaign
+    baselineattributes: *recordAttributesWithURL
+    additionalattributes:
+      - name: key
+        type: string
+        required: true
+      - name: displayname
+        type: string
+        required: true
+      - name: person
+        required: false
+        type: reference
+        entity: *person
+    survey: &survey
+      name: survey
+      baselineattributes: *recordAttributesWithURL
+      additionalattributes:
+        - name: key
+          type: string
+          required: true
+        - name: displayname
+          type: string
+          required: true
+        - name: person
+          required: false
+          type: reference
+          entity: *person
+        # - name: campaign
+        #   required: false
+        #   type: reference
+        #   entity: *campaign
+    surveyquestion: &surveyquestion
+      name: surveyquestions
+      parent: *survey
+      baselineattributes: *recordAttributesWithURL
+      additionalattributes:
+        - name: key
+          type: string
+          required: true
+        - name: displayname
+          type: string
+          required: true
+        - name: person
+          required: false
+          type: reference
+          entity: *person
+    surveyrespondent: &surveyrespondent
+      name: respondents
+
+      baselineattributes: *recordAttributesWithURL
+      additionalattributes:
+        - name: key
+          type: string
+          required: true
+        - name: displayname
+          type: string
+          required: true
+        - name: person
+          required: false
+          type: reference
+          entity: *person
+        # - name: campaign
+        #   required: false
+        #   type: reference
+        #   entity: *campaign
+        - name: survey
+          required: false
+          type: reference
+          entity: *survey
+
+    surveyanswer: &surveyanswers
+      name: surveyanswers
+      parent: *surveyrespondent
+      baselineattributes: *recordAttributesWithURL
+      additionalattributes:
+        - name: question
+          type: reference
+          required: true
+          entity: *surveyquestion
+        - name: answer
+          type: string
+          required: true
+
+  # Use for storing sites, folders etc.
+
+models:
+  itemMethods: &itemMethods
+    - name: read
+      description: Read a single item
+      parameters:
+        - name: id
+          description: The id of the item
+          type: int
+          required: true
+      returns:
+        type: object
+
+    - name: create
+      description: Create a new item
+      parameters:
+        - name: item
+          description: The item to create
+          type: object
+          required: true
+      returns:
+        type: object
+    - name: update
+      description: Update an existing item
+      parameters:
+        - name: item
+          description: The item to update
+          type: object
+          required: true
+      returns:
+        type: object
+
+    - name: delete
+      description: Delete an existing item
+      parameters:
+        - name: id
+          description: The id of the item
+          type: int
+          required: true
+      returns:
+        type: void
+    - name: search
+      description: Search for items
+      parameters:
+        - name: query
+          description: The search query
+          type: string
+          required: true
+
+      returns:
+        type: page
+
+services:
+  - name: person
+    description: Manage persons
+    entity:
+      type: record
+      model: person
+      objectname: person
+      entity: *person
+    methods: *itemMethods
+
+  - name: application
+    description: Manage applications
+    entity:
+      type: record
+      model: application
+      objectname: Application
+      entity: *application
+    methods: *itemMethods

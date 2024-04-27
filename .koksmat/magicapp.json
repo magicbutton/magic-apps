@@ -1,0 +1,1307 @@
+{
+  "name": "apps",
+  "type": "magicservice",
+  "namespace": "apps",
+  "organisation": "magicbutton",
+  "magicappversion": "v0.0.1",
+  "description": "A simple app to manage users, groups and memberships",
+  "baseattributes": {
+    "urlrecord": [
+      {
+        "name": "tenant",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      },
+      {
+        "name": "url",
+        "type": "string",
+        "required": true
+      }
+    ],
+    "record": [
+      {
+        "name": "tenant",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "name",
+        "type": "string",
+        "required": true
+      },
+      {
+        "name": "description",
+        "type": "string",
+        "required": false
+      }
+    ]
+  },
+  "entities": {
+    "person": {
+      "name": "person",
+      "description": "person",
+      "baselineattributes": [
+        {
+          "name": "tenant",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "additionalattributes": [
+        {
+          "name": "displayname",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "email",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    "application": {
+      "name": "application",
+      "baselineattributes": [
+        {
+          "name": "tenant",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "additionalattributes": [
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "displayname",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "owner",
+          "required": false,
+          "type": "reference",
+          "entity": {
+            "name": "person",
+            "description": "person",
+            "baselineattributes": [
+              {
+                "name": "tenant",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "required": false
+              }
+            ],
+            "additionalattributes": [
+              {
+                "name": "displayname",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "email",
+                "type": "string",
+                "required": true
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "campaign": {
+      "name": "campaign",
+      "baselineattributes": [
+        {
+          "name": "tenant",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "name",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "description",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "url",
+          "type": "string",
+          "required": true
+        }
+      ],
+      "additionalattributes": [
+        {
+          "name": "key",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "displayname",
+          "type": "string",
+          "required": true
+        },
+        {
+          "name": "person",
+          "required": false,
+          "type": "reference",
+          "entity": {
+            "name": "person",
+            "description": "person",
+            "baselineattributes": [
+              {
+                "name": "tenant",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "required": false
+              }
+            ],
+            "additionalattributes": [
+              {
+                "name": "displayname",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "email",
+                "type": "string",
+                "required": true
+              }
+            ]
+          }
+        }
+      ],
+      "survey": {
+        "name": "survey",
+        "baselineattributes": [
+          {
+            "name": "tenant",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "additionalattributes": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "displayname",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "person",
+            "required": false,
+            "type": "reference",
+            "entity": {
+              "name": "person",
+              "description": "person",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "email",
+                  "type": "string",
+                  "required": true
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "surveyquestion": {
+        "name": "surveyquestions",
+        "parent": {
+          "name": "survey",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "person",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "person",
+                "description": "person",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "email",
+                    "type": "string",
+                    "required": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "baselineattributes": [
+          {
+            "name": "tenant",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "additionalattributes": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "displayname",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "person",
+            "required": false,
+            "type": "reference",
+            "entity": {
+              "name": "person",
+              "description": "person",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "email",
+                  "type": "string",
+                  "required": true
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "surveyrespondent": {
+        "name": "respondents",
+        "baselineattributes": [
+          {
+            "name": "tenant",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "additionalattributes": [
+          {
+            "name": "key",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "displayname",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "person",
+            "required": false,
+            "type": "reference",
+            "entity": {
+              "name": "person",
+              "description": "person",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "email",
+                  "type": "string",
+                  "required": true
+                }
+              ]
+            }
+          },
+          {
+            "name": "survey",
+            "required": false,
+            "type": "reference",
+            "entity": {
+              "name": "survey",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "url",
+                  "type": "string",
+                  "required": true
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "key",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "person",
+                  "required": false,
+                  "type": "reference",
+                  "entity": {
+                    "name": "person",
+                    "description": "person",
+                    "baselineattributes": [
+                      {
+                        "name": "tenant",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "description",
+                        "type": "string",
+                        "required": false
+                      }
+                    ],
+                    "additionalattributes": [
+                      {
+                        "name": "displayname",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "email",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      },
+      "surveyanswer": {
+        "name": "surveyanswers",
+        "parent": {
+          "name": "respondents",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "person",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "person",
+                "description": "person",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "email",
+                    "type": "string",
+                    "required": true
+                  }
+                ]
+              }
+            },
+            {
+              "name": "survey",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "survey",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "url",
+                    "type": "string",
+                    "required": true
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "key",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "person",
+                    "required": false,
+                    "type": "reference",
+                    "entity": {
+                      "name": "person",
+                      "description": "person",
+                      "baselineattributes": [
+                        {
+                          "name": "tenant",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "description",
+                          "type": "string",
+                          "required": false
+                        }
+                      ],
+                      "additionalattributes": [
+                        {
+                          "name": "displayname",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "email",
+                          "type": "string",
+                          "required": true
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "baselineattributes": [
+          {
+            "name": "tenant",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "name",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "description",
+            "type": "string",
+            "required": false
+          },
+          {
+            "name": "url",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "additionalattributes": [
+          {
+            "name": "question",
+            "type": "reference",
+            "required": true,
+            "entity": {
+              "name": "surveyquestions",
+              "parent": {
+                "name": "survey",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "url",
+                    "type": "string",
+                    "required": true
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "key",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "person",
+                    "required": false,
+                    "type": "reference",
+                    "entity": {
+                      "name": "person",
+                      "description": "person",
+                      "baselineattributes": [
+                        {
+                          "name": "tenant",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "description",
+                          "type": "string",
+                          "required": false
+                        }
+                      ],
+                      "additionalattributes": [
+                        {
+                          "name": "displayname",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "email",
+                          "type": "string",
+                          "required": true
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "url",
+                  "type": "string",
+                  "required": true
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "key",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "person",
+                  "required": false,
+                  "type": "reference",
+                  "entity": {
+                    "name": "person",
+                    "description": "person",
+                    "baselineattributes": [
+                      {
+                        "name": "tenant",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "description",
+                        "type": "string",
+                        "required": false
+                      }
+                    ],
+                    "additionalattributes": [
+                      {
+                        "name": "displayname",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "email",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "answer",
+            "type": "string",
+            "required": true
+          }
+        ]
+      }
+    }
+  },
+  "models": {
+    "itemMethods": [
+      {
+        "name": "read",
+        "description": "Read a single item",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "The id of the item",
+            "type": "int",
+            "required": true
+          }
+        ],
+        "returns": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "create",
+        "description": "Create a new item",
+        "parameters": [
+          {
+            "name": "item",
+            "description": "The item to create",
+            "type": "object",
+            "required": true
+          }
+        ],
+        "returns": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "update",
+        "description": "Update an existing item",
+        "parameters": [
+          {
+            "name": "item",
+            "description": "The item to update",
+            "type": "object",
+            "required": true
+          }
+        ],
+        "returns": {
+          "type": "object"
+        }
+      },
+      {
+        "name": "delete",
+        "description": "Delete an existing item",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "The id of the item",
+            "type": "int",
+            "required": true
+          }
+        ],
+        "returns": {
+          "type": "void"
+        }
+      },
+      {
+        "name": "search",
+        "description": "Search for items",
+        "parameters": [
+          {
+            "name": "query",
+            "description": "The search query",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "returns": {
+          "type": "page"
+        }
+      }
+    ]
+  },
+  "services": [
+    {
+      "name": "person",
+      "description": "Manage persons",
+      "entity": {
+        "type": "record",
+        "model": "person",
+        "objectname": "person",
+        "entity": {
+          "name": "person",
+          "description": "person",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "email",
+              "type": "string",
+              "required": true
+            }
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "read",
+          "description": "Read a single item",
+          "parameters": [
+            {
+              "name": "id",
+              "description": "The id of the item",
+              "type": "int",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "create",
+          "description": "Create a new item",
+          "parameters": [
+            {
+              "name": "item",
+              "description": "The item to create",
+              "type": "object",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "update",
+          "description": "Update an existing item",
+          "parameters": [
+            {
+              "name": "item",
+              "description": "The item to update",
+              "type": "object",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "delete",
+          "description": "Delete an existing item",
+          "parameters": [
+            {
+              "name": "id",
+              "description": "The id of the item",
+              "type": "int",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "search",
+          "description": "Search for items",
+          "parameters": [
+            {
+              "name": "query",
+              "description": "The search query",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "page"
+          }
+        }
+      ]
+    },
+    {
+      "name": "application",
+      "description": "Manage applications",
+      "entity": {
+        "type": "record",
+        "model": "application",
+        "objectname": "Application",
+        "entity": {
+          "name": "application",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "owner",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "person",
+                "description": "person",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "email",
+                    "type": "string",
+                    "required": true
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      },
+      "methods": [
+        {
+          "name": "read",
+          "description": "Read a single item",
+          "parameters": [
+            {
+              "name": "id",
+              "description": "The id of the item",
+              "type": "int",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "create",
+          "description": "Create a new item",
+          "parameters": [
+            {
+              "name": "item",
+              "description": "The item to create",
+              "type": "object",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "update",
+          "description": "Update an existing item",
+          "parameters": [
+            {
+              "name": "item",
+              "description": "The item to update",
+              "type": "object",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "object"
+          }
+        },
+        {
+          "name": "delete",
+          "description": "Delete an existing item",
+          "parameters": [
+            {
+              "name": "id",
+              "description": "The id of the item",
+              "type": "int",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "void"
+          }
+        },
+        {
+          "name": "search",
+          "description": "Search for items",
+          "parameters": [
+            {
+              "name": "query",
+              "description": "The search query",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "returns": {
+            "type": "page"
+          }
+        }
+      ]
+    }
+  ]
+}
