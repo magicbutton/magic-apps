@@ -13,8 +13,8 @@ package person
                 )
 
 
-func personDelete(id int ) error {
-log.Println("Calling personDelete")
+func PersonDelete(id int ) error {
+log.Println("Calling PersonDelete")
 return errors.New("Not implemented")
 
 }

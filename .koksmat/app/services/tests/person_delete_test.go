@@ -14,10 +14,10 @@ keep: false
         "github.com/stretchr/testify/assert"
     )
     
-    func Testpersondelete(t *testing.T) {
+    func TestPersondelete(t *testing.T) {
                 // noma4.1.1
         
-        err := person.personDelete(-1)
+        err := person.PersonDelete(-1)
         if err != nil {
             t.Errorf("Error %s", err)
         }

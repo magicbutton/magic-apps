@@ -18,6 +18,7 @@ CREATE TABLE public.person
     ,tenant character varying COLLATE pg_catalog."default"  NOT NULL
     ,name character varying COLLATE pg_catalog."default"  NOT NULL
     ,description character varying COLLATE pg_catalog."default" 
+    ,unique_person_id character varying COLLATE pg_catalog."default"  NOT NULL
     ,displayname character varying COLLATE pg_catalog."default"  NOT NULL
     ,email character varying COLLATE pg_catalog."default"  NOT NULL
 

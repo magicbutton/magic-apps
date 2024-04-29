@@ -38,6 +38,9 @@ entities:
     description: person
     baselineattributes: *recordAttributes
     additionalattributes:
+      - name: unique_person_id
+        type: string
+        required: true
       - name: displayname
         type: string
         required: true
@@ -52,6 +55,9 @@ entities:
         type: string
         required: true
       - name: displayname
+        type: string
+        required: true
+      - name: imported_ownername
         type: string
         required: true
       - name: owner
@@ -72,75 +78,53 @@ entities:
         required: false
         type: reference
         entity: *person
-    survey: &survey
-      name: survey
-      baselineattributes: *recordAttributesWithURL
-      additionalattributes:
-        - name: key
-          type: string
-          required: true
-        - name: displayname
-          type: string
-          required: true
-        - name: person
-          required: false
-          type: reference
-          entity: *person
-        # - name: campaign
-        #   required: false
-        #   type: reference
-        #   entity: *campaign
-    surveyquestion: &surveyquestion
-      name: surveyquestions
-      parent: *survey
-      baselineattributes: *recordAttributesWithURL
-      additionalattributes:
-        - name: key
-          type: string
-          required: true
-        - name: displayname
-          type: string
-          required: true
-        - name: person
-          required: false
-          type: reference
-          entity: *person
-    surveyrespondent: &surveyrespondent
-      name: respondents
+  survey: &survey
+    name: survey
+    baselineattributes: *recordAttributesWithURL
+    additionalattributes:
+      - name: key
+        type: string
+        required: true
+      - name: displayname
+        type: string
+        required: true
+      - name: person
+        required: false
+        type: reference
+        entity: *person
+      - name: campaign
+        required: false
+        type: reference
+        entity: *campaign
+      - name: questions
+        type: string
+        required: true
 
-      baselineattributes: *recordAttributesWithURL
-      additionalattributes:
-        - name: key
-          type: string
-          required: true
-        - name: displayname
-          type: string
-          required: true
-        - name: person
-          required: false
-          type: reference
-          entity: *person
-        # - name: campaign
-        #   required: false
-        #   type: reference
-        #   entity: *campaign
-        - name: survey
-          required: false
-          type: reference
-          entity: *survey
+  surveyresponse: &surveyresponse
+    name: surveyresponse
 
-    surveyanswer: &surveyanswers
-      name: surveyanswers
-      parent: *surveyrespondent
-      baselineattributes: *recordAttributesWithURL
-      additionalattributes:
-        - name: question
-          type: reference
-          required: true
-          entity: *surveyquestion
-        - name: answer
-          type: string
-          required: true
+    baselineattributes: *recordAttributesWithURL
+    additionalattributes:
+      - name: key
+        type: string
+        required: true
+      - name: displayname
+        type: string
+        required: true
+      - name: person
+        required: false
+        type: reference
+        entity: *person
+      - name: survey
+        required: false
+        type: reference
+        entity: *survey
+      - name: questions
+        type: string
+        required: true
+      - name: answers
+        type: string
+        required: true
 
   # Use for storing sites, folders etc.
 
@@ -201,7 +185,7 @@ services:
     entity:
       type: record
       model: person
-      objectname: person
+      objectname: Person
       entity: *person
     methods: *itemMethods
 
@@ -212,4 +196,31 @@ services:
       model: application
       objectname: Application
       entity: *application
+    methods: *itemMethods
+
+  - name: campaign
+    description: Manage campaigns
+    entity:
+      type: record
+      model: campaign
+      objectname: Campaign
+      entity: *campaign
+    methods: *itemMethods
+
+  - name: survey
+    description: Manage surveys
+    entity:
+      type: record
+      model: survey
+      objectname: Survey
+      entity: *survey
+    methods: *itemMethods
+
+  - name: surveyresponse
+    description: Manage survey responses
+    entity:
+      type: record
+      model: surveyresponse
+      objectname: SurveyResponse
+      entity: *surveyresponse
     methods: *itemMethods

@@ -15,8 +15,8 @@ import (
     )
 
 
-func personUpdate(item personmodel.person ) (*personmodel.person,error) {
-log.Println("Calling personUpdate")
+func PersonUpdate(item personmodel.Person ) (*personmodel.Person,error) {
+log.Println("Calling PersonUpdate")
     
     
     

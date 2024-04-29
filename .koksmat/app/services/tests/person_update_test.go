@@ -14,11 +14,11 @@ keep: false
         "github.com/stretchr/testify/assert"
     )
     
-    func Testpersonupdate(t *testing.T) {
+    func TestPersonupdate(t *testing.T) {
                                 // transformer v1
-            object := personmodel.person{}
+            object := personmodel.Person{}
          
-            result,err := person.personUpdate(object)
+            result,err := person.PersonUpdate(object)
             if err != nil {
                 t.Errorf("Error %s", err)
             }

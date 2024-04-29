@@ -32,6 +32,7 @@ type Application struct {
     Description string `json:"description"`
     Key string `json:"key"`
     Displayname string `json:"displayname"`
+    Imported_Ownername string `json:"imported_ownername"`
     Owner databasetypes.Reference `json:"owner"`
 
 }

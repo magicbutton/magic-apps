@@ -18,7 +18,7 @@ import (
 	"github.com/nats-io/nats.go/micro"
 )
 
-func HandlepersonRequests(req micro.Request) {
+func HandlePersonRequests(req micro.Request) {
 
     rawRequest := string(req.Data())
 	if rawRequest == "ping" {
@@ -47,10 +47,10 @@ if (len(payload.Args) < 2) {
 
 
     
-    result,err := person.personRead(StrToInt(payload.Args[1]))
+    result,err := person.PersonRead(StrToInt(payload.Args[1]))
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling personRead: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling PersonRead: %s", err))
 
 
         return
@@ -68,7 +68,7 @@ if (len(payload.Args) < 2) {
 
 
                 // transformer v1
-            object := personmodel.person{}
+            object := personmodel.Person{}
             body := ""
 
             json.Unmarshal([]byte(payload.Args[1]), &body)
@@ -80,10 +80,10 @@ if (len(payload.Args) < 2) {
                 return
             }
                      
-    result,err := person.personCreate(object)
+    result,err := person.PersonCreate(object)
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling personCreate: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling PersonCreate: %s", err))
 
 
         return
@@ -101,7 +101,7 @@ if (len(payload.Args) < 2) {
 
 
                 // transformer v1
-            object := personmodel.person{}
+            object := personmodel.Person{}
             body := ""
 
             json.Unmarshal([]byte(payload.Args[1]), &body)
@@ -113,10 +113,10 @@ if (len(payload.Args) < 2) {
                 return
             }
                      
-    result,err := person.personUpdate(object)
+    result,err := person.PersonUpdate(object)
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling personUpdate: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling PersonUpdate: %s", err))
 
 
         return
@@ -133,10 +133,10 @@ if (len(payload.Args) < 2) {
 }
 
 
-            err :=  person.personDelete(StrToInt(payload.Args[1]))
+            err :=  person.PersonDelete(StrToInt(payload.Args[1]))
             if (err != nil) {
                 log.Println("Error", err)
-                ServiceResponseError(req, fmt.Sprintf("Error calling personDelete: %s", err))
+                ServiceResponseError(req, fmt.Sprintf("Error calling PersonDelete: %s", err))
 
 
                 return
@@ -153,10 +153,10 @@ if (len(payload.Args) < 2) {
 
 
     
-    result,err := person.personSearch(payload.Args[1])
+    result,err := person.PersonSearch(payload.Args[1])
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling personSearch: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling PersonSearch: %s", err))
 
 
         return

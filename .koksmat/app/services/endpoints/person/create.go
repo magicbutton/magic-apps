@@ -15,8 +15,8 @@ import (
     )
 
 
-func personCreate(item personmodel.person ) (*personmodel.person,error) {
-log.Println("Calling personCreate")
+func PersonCreate(item personmodel.Person ) (*personmodel.Person,error) {
+log.Println("Calling PersonCreate")
     
     
     

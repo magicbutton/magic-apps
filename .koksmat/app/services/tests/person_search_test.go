@@ -14,9 +14,9 @@ keep: false
         "github.com/stretchr/testify/assert"
     )
     
-    func Testpersonsearch(t *testing.T) {
+    func TestPersonsearch(t *testing.T) {
                     
-            result,err := person.personSearch(".")
+            result,err := person.PersonSearch(".")
             if err != nil {
                 t.Errorf("Error %s", err)
             }

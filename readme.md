@@ -1,6 +1,8 @@
 ---
-title: magic-apps
-description: Describe the main purpose of this kitchen
+title: Applications
+description: Supporting the "App" domain
 ---
 
-# magic-apps
+# Magic Apps
+
+The `magic-apps` application deals which
