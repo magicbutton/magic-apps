@@ -74,7 +74,7 @@ entities:
       - name: displayname
         type: string
         required: true
-      - name: person
+      - name: owner
         required: false
         type: reference
         entity: *person
@@ -224,3 +224,80 @@ services:
       objectname: SurveyResponse
       entity: *surveyresponse
     methods: *itemMethods
+icons:
+  ChevronLeft: &ChevronLeft
+    name: ChevronLeft
+
+  ChevronRight: &ChevronRight
+    name: ChevronRight
+  Copy: &Copy
+    name: Copy
+  CreditCard: &CreditCard
+    name: CreditCard
+  File: &File
+    name: File
+  Home: &Home
+    name: Home
+  LineChart: &LineChart
+    name: LineChart
+  ListFilter: &ListFilter
+    name: ListFilter
+  MoreVertical: &MoreVertical
+    name: MoreVertical
+  Package: &Package
+    name: Package
+  Package2: &Package2
+    name: Package2
+  PanelLeft: &PanelLeft
+    name: PanelLeft
+  Search: &Search
+    name: Search
+  Settings: &Settings
+    name: Settings
+  ShoppingCart: &ShoppingCart
+    name: ShoppingCart
+  Truck: &Truck
+    name: Truck
+  Users2: &Users2
+    name: Users2
+
+components:
+  listowners: &listowners
+    object:
+      entity: *person
+      relations:
+        - name: applications
+          entity: *application
+        - name: surveys
+          entity: *survey
+  listcampaigns: &listcampaigns
+    object:
+      entity: *campaign
+      relations: # this will make it possible to link to the person
+        - name: person
+          entity: *person
+  listsurveys: &listsurveys
+    object:
+      entity: *survey
+      relations:
+        - name: person
+          entity: *person
+        - name: campaign
+          entity: *campaign
+# ui:
+#   - name: owners
+#     components: listowners
+#       - name: listowners
+#         reference: *listowners
+
+# icons:
+
+# menu:
+#   top:
+#   left:
+#     you:
+#       slug: you
+
+#     applications:
+#     campaigns:
+

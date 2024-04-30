@@ -6,6 +6,8 @@
 import { Checkbox } from "@/components/ui/checkbox";
 import { Button } from "@/components/ui/button";
 
+
+
 export default function Component() {
   return (
     <section className="w-full max-w-3xl mx-auto py-12 md:py-16 lg:py-20">
