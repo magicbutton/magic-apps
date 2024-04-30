@@ -38,11 +38,7 @@ export interface Owner {
   entity: string;
 }
 
-import { Result } from "@/koksmat/httphelper";
-import { run } from "@/koksmat/magicservices";
 import { useService } from "@/koksmat/useservice";
-import { set } from "date-fns";
-import { useEffect, useState } from "react";
 
 function App(props: { app: Application }) {
   return (

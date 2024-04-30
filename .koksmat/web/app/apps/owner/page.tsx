@@ -20,11 +20,7 @@ export interface Item {
   applications: any;
 }
 
-import { Result } from "@/koksmat/httphelper";
-import { run } from "@/koksmat/magicservices";
 import { useService } from "@/koksmat/useservice";
-import { set } from "date-fns";
-import { useEffect, useState } from "react";
 
 function Owner(props: { owner: Item }) {
   const { owner } = props;
