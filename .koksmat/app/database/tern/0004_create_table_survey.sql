@@ -21,15 +21,33 @@ CREATE TABLE public.survey
     ,url character varying COLLATE pg_catalog."default"  NOT NULL
     ,key character varying COLLATE pg_catalog."default"  NOT NULL
     ,displayname character varying COLLATE pg_catalog."default"  NOT NULL
-    ,person_id int  
+    ,owner_id int  
     ,campaign_id int  
-    ,questions character varying COLLATE pg_catalog."default"  NOT NULL
+    ,question1 character varying COLLATE pg_catalog."default" 
+    ,question2 character varying COLLATE pg_catalog."default" 
+    ,question3 character varying COLLATE pg_catalog."default" 
+    ,question4 character varying COLLATE pg_catalog."default" 
+    ,question5 character varying COLLATE pg_catalog."default" 
+    ,question6 character varying COLLATE pg_catalog."default" 
+    ,question7 character varying COLLATE pg_catalog."default" 
+    ,question8 character varying COLLATE pg_catalog."default" 
+    ,question9 character varying COLLATE pg_catalog."default" 
+    ,truefalse1 character varying COLLATE pg_catalog."default" 
+    ,truefalse2 character varying COLLATE pg_catalog."default" 
+    ,truefalse3 character varying COLLATE pg_catalog."default" 
+    ,datetime1 character varying COLLATE pg_catalog."default" 
+    ,datetime2 character varying COLLATE pg_catalog."default" 
+    ,datetime3 character varying COLLATE pg_catalog."default" 
+    ,number1 character varying COLLATE pg_catalog."default" 
+    ,number2 character varying COLLATE pg_catalog."default" 
+    ,number3 character varying COLLATE pg_catalog."default" 
+    ,questions JSONB  
 
 
 );
 
                 ALTER TABLE IF EXISTS public.survey
-                ADD FOREIGN KEY (person_id)
+                ADD FOREIGN KEY (owner_id)
                 REFERENCES public.person (id) MATCH SIMPLE
                 ON UPDATE NO ACTION
                 ON DELETE NO ACTION

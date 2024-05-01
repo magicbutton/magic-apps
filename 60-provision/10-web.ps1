@@ -64,8 +64,8 @@ spec:
         ports:
           - containerPort: $port
         env:
-        - name: KEY
-          value: VALUE3
+        - name: NATS
+          value: http://nats:4222
         - name: DATAPATH
           value: /data          
         volumeMounts:

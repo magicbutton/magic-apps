@@ -17,9 +17,9 @@ export default function Layout(props: { children: any }) {
         <div className="hidden md:block">
           <AppLeftRail />
         </div>
-        <div className="grow bg-slate-50"></div>
+        <div className="grow bg-slate-50 dark:bg-slate-800"></div>
         <div className="container">{children}</div>
-        <div className="grow  bg-slate-50"></div>
+        <div className="grow  bg-slate-50  dark:bg-slate-800"></div>
         <div className="hidden md:block"></div>
       </div>
       <div className=""></div>

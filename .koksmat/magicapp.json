@@ -201,7 +201,7 @@
           "required": true
         },
         {
-          "name": "person",
+          "name": "owner",
           "required": false,
           "type": "reference",
           "entity": {
@@ -281,7 +281,7 @@
           "required": true
         },
         {
-          "name": "person",
+          "name": "owner",
           "required": false,
           "type": "reference",
           "entity": {
@@ -363,7 +363,7 @@
                 "required": true
               },
               {
-                "name": "person",
+                "name": "owner",
                 "required": false,
                 "type": "reference",
                 "entity": {
@@ -409,9 +409,99 @@
           }
         },
         {
-          "name": "questions",
+          "name": "question1",
           "type": "string",
-          "required": true
+          "required": false
+        },
+        {
+          "name": "question2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question4",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question5",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question6",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question7",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question8",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "question9",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "truefalse1",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "truefalse2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "truefalse3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "datetime1",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "datetime2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "datetime3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "number1",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "number2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "number3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "questions",
+          "type": "json",
+          "required": false
         }
       ]
     },
@@ -441,6 +531,11 @@
       ],
       "additionalattributes": [
         {
+          "name": "responsedate",
+          "type": "datetime",
+          "required": false
+        },
+        {
           "name": "key",
           "type": "string",
           "required": true
@@ -451,7 +546,7 @@
           "required": true
         },
         {
-          "name": "person",
+          "name": "respondent",
           "required": false,
           "type": "reference",
           "entity": {
@@ -533,7 +628,7 @@
                 "required": true
               },
               {
-                "name": "person",
+                "name": "owner",
                 "required": false,
                 "type": "reference",
                 "entity": {
@@ -615,7 +710,7 @@
                       "required": true
                     },
                     {
-                      "name": "person",
+                      "name": "owner",
                       "required": false,
                       "type": "reference",
                       "entity": {
@@ -661,22 +756,287 @@
                 }
               },
               {
+                "name": "question1",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question2",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question3",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question4",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question5",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question6",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question7",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question8",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "question9",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "truefalse1",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "truefalse2",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "truefalse3",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "datetime1",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "datetime2",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "datetime3",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "number1",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "number2",
+                "type": "string",
+                "required": false
+              },
+              {
+                "name": "number3",
+                "type": "string",
+                "required": false
+              },
+              {
                 "name": "questions",
+                "type": "json",
+                "required": false
+              }
+            ]
+          }
+        },
+        {
+          "name": "application",
+          "required": false,
+          "type": "reference",
+          "entity": {
+            "name": "application",
+            "baselineattributes": [
+              {
+                "name": "tenant",
                 "type": "string",
                 "required": true
+              },
+              {
+                "name": "name",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "description",
+                "type": "string",
+                "required": false
+              }
+            ],
+            "additionalattributes": [
+              {
+                "name": "key",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "displayname",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "imported_ownername",
+                "type": "string",
+                "required": true
+              },
+              {
+                "name": "owner",
+                "required": false,
+                "type": "reference",
+                "entity": {
+                  "name": "person",
+                  "description": "person",
+                  "baselineattributes": [
+                    {
+                      "name": "tenant",
+                      "type": "string",
+                      "required": true
+                    },
+                    {
+                      "name": "name",
+                      "type": "string",
+                      "required": true
+                    },
+                    {
+                      "name": "description",
+                      "type": "string",
+                      "required": false
+                    }
+                  ],
+                  "additionalattributes": [
+                    {
+                      "name": "unique_person_id",
+                      "type": "string",
+                      "required": true
+                    },
+                    {
+                      "name": "displayname",
+                      "type": "string",
+                      "required": true
+                    },
+                    {
+                      "name": "email",
+                      "type": "string",
+                      "required": true
+                    }
+                  ]
+                }
               }
             ]
           }
         },
         {
           "name": "questions",
-          "type": "string",
-          "required": true
+          "type": "json",
+          "required": false
         },
         {
           "name": "answers",
+          "type": "json",
+          "required": false
+        },
+        {
+          "name": "answer1",
           "type": "string",
-          "required": true
+          "required": false
+        },
+        {
+          "name": "answer2",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer3",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer4",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer5",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer6",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer7",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer8",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "answer9",
+          "type": "string",
+          "required": false
+        },
+        {
+          "name": "truefalse1",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "truefalse2",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "truefalse3",
+          "type": "boolean",
+          "required": false
+        },
+        {
+          "name": "datetime1",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "datetime2",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "datetime3",
+          "type": "datetime",
+          "required": false
+        },
+        {
+          "name": "number1",
+          "type": "int",
+          "required": false
+        },
+        {
+          "name": "number2",
+          "type": "int",
+          "required": false
+        },
+        {
+          "name": "number3",
+          "type": "int",
+          "required": false
         }
       ]
     }
@@ -1094,7 +1454,7 @@
               "required": true
             },
             {
-              "name": "person",
+              "name": "owner",
               "required": false,
               "type": "reference",
               "entity": {
@@ -1260,7 +1620,7 @@
               "required": true
             },
             {
-              "name": "person",
+              "name": "owner",
               "required": false,
               "type": "reference",
               "entity": {
@@ -1342,7 +1702,7 @@
                     "required": true
                   },
                   {
-                    "name": "person",
+                    "name": "owner",
                     "required": false,
                     "type": "reference",
                     "entity": {
@@ -1388,9 +1748,99 @@
               }
             },
             {
-              "name": "questions",
+              "name": "question1",
               "type": "string",
-              "required": true
+              "required": false
+            },
+            {
+              "name": "question2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question4",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question5",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question6",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question7",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question8",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question9",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "datetime1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "datetime2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "datetime3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "number1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "number2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "number3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "questions",
+              "type": "json",
+              "required": false
             }
           ]
         }
@@ -1506,6 +1956,11 @@
           ],
           "additionalattributes": [
             {
+              "name": "responsedate",
+              "type": "datetime",
+              "required": false
+            },
+            {
               "name": "key",
               "type": "string",
               "required": true
@@ -1516,7 +1971,7 @@
               "required": true
             },
             {
-              "name": "person",
+              "name": "respondent",
               "required": false,
               "type": "reference",
               "entity": {
@@ -1598,7 +2053,7 @@
                     "required": true
                   },
                   {
-                    "name": "person",
+                    "name": "owner",
                     "required": false,
                     "type": "reference",
                     "entity": {
@@ -1680,7 +2135,7 @@
                           "required": true
                         },
                         {
-                          "name": "person",
+                          "name": "owner",
                           "required": false,
                           "type": "reference",
                           "entity": {
@@ -1726,22 +2181,287 @@
                     }
                   },
                   {
+                    "name": "question1",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question2",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question3",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question4",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question5",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question6",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question7",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question8",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "question9",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "truefalse1",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "truefalse2",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "truefalse3",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "datetime1",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "datetime2",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "datetime3",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "number1",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "number2",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "number3",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
                     "name": "questions",
+                    "type": "json",
+                    "required": false
+                  }
+                ]
+              }
+            },
+            {
+              "name": "application",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "application",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
                     "type": "string",
                     "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "key",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "imported_ownername",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "owner",
+                    "required": false,
+                    "type": "reference",
+                    "entity": {
+                      "name": "person",
+                      "description": "person",
+                      "baselineattributes": [
+                        {
+                          "name": "tenant",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "description",
+                          "type": "string",
+                          "required": false
+                        }
+                      ],
+                      "additionalattributes": [
+                        {
+                          "name": "unique_person_id",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "displayname",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "email",
+                          "type": "string",
+                          "required": true
+                        }
+                      ]
+                    }
                   }
                 ]
               }
             },
             {
               "name": "questions",
-              "type": "string",
-              "required": true
+              "type": "json",
+              "required": false
             },
             {
               "name": "answers",
+              "type": "json",
+              "required": false
+            },
+            {
+              "name": "answer1",
               "type": "string",
-              "required": true
+              "required": false
+            },
+            {
+              "name": "answer2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer4",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer5",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer6",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer7",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer8",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "answer9",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse1",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "truefalse2",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "truefalse3",
+              "type": "boolean",
+              "required": false
+            },
+            {
+              "name": "datetime1",
+              "type": "datetime",
+              "required": false
+            },
+            {
+              "name": "datetime2",
+              "type": "datetime",
+              "required": false
+            },
+            {
+              "name": "datetime3",
+              "type": "datetime",
+              "required": false
+            },
+            {
+              "name": "number1",
+              "type": "int",
+              "required": false
+            },
+            {
+              "name": "number2",
+              "type": "int",
+              "required": false
+            },
+            {
+              "name": "number3",
+              "type": "int",
+              "required": false
             }
           ]
         }
@@ -1824,5 +2544,967 @@
         }
       ]
     }
-  ]
+  ],
+  "icons": {
+    "ChevronLeft": {
+      "name": "ChevronLeft"
+    },
+    "ChevronRight": {
+      "name": "ChevronRight"
+    },
+    "Copy": {
+      "name": "Copy"
+    },
+    "CreditCard": {
+      "name": "CreditCard"
+    },
+    "File": {
+      "name": "File"
+    },
+    "Home": {
+      "name": "Home"
+    },
+    "LineChart": {
+      "name": "LineChart"
+    },
+    "ListFilter": {
+      "name": "ListFilter"
+    },
+    "MoreVertical": {
+      "name": "MoreVertical"
+    },
+    "Package": {
+      "name": "Package"
+    },
+    "Package2": {
+      "name": "Package2"
+    },
+    "PanelLeft": {
+      "name": "PanelLeft"
+    },
+    "Search": {
+      "name": "Search"
+    },
+    "Settings": {
+      "name": "Settings"
+    },
+    "ShoppingCart": {
+      "name": "ShoppingCart"
+    },
+    "Truck": {
+      "name": "Truck"
+    },
+    "Users2": {
+      "name": "Users2"
+    }
+  },
+  "components": {
+    "listowners": {
+      "object": {
+        "entity": {
+          "name": "person",
+          "description": "person",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "unique_person_id",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "email",
+              "type": "string",
+              "required": true
+            }
+          ]
+        },
+        "relations": [
+          {
+            "name": "applications",
+            "entity": {
+              "name": "application",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "key",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "imported_ownername",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "owner",
+                  "required": false,
+                  "type": "reference",
+                  "entity": {
+                    "name": "person",
+                    "description": "person",
+                    "baselineattributes": [
+                      {
+                        "name": "tenant",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "description",
+                        "type": "string",
+                        "required": false
+                      }
+                    ],
+                    "additionalattributes": [
+                      {
+                        "name": "unique_person_id",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "displayname",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "email",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "surveys",
+            "entity": {
+              "name": "survey",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "url",
+                  "type": "string",
+                  "required": true
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "key",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "owner",
+                  "required": false,
+                  "type": "reference",
+                  "entity": {
+                    "name": "person",
+                    "description": "person",
+                    "baselineattributes": [
+                      {
+                        "name": "tenant",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "description",
+                        "type": "string",
+                        "required": false
+                      }
+                    ],
+                    "additionalattributes": [
+                      {
+                        "name": "unique_person_id",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "displayname",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "email",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "campaign",
+                  "required": false,
+                  "type": "reference",
+                  "entity": {
+                    "name": "campaign",
+                    "baselineattributes": [
+                      {
+                        "name": "tenant",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "description",
+                        "type": "string",
+                        "required": false
+                      },
+                      {
+                        "name": "url",
+                        "type": "string",
+                        "required": true
+                      }
+                    ],
+                    "additionalattributes": [
+                      {
+                        "name": "key",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "displayname",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "owner",
+                        "required": false,
+                        "type": "reference",
+                        "entity": {
+                          "name": "person",
+                          "description": "person",
+                          "baselineattributes": [
+                            {
+                              "name": "tenant",
+                              "type": "string",
+                              "required": true
+                            },
+                            {
+                              "name": "name",
+                              "type": "string",
+                              "required": true
+                            },
+                            {
+                              "name": "description",
+                              "type": "string",
+                              "required": false
+                            }
+                          ],
+                          "additionalattributes": [
+                            {
+                              "name": "unique_person_id",
+                              "type": "string",
+                              "required": true
+                            },
+                            {
+                              "name": "displayname",
+                              "type": "string",
+                              "required": true
+                            },
+                            {
+                              "name": "email",
+                              "type": "string",
+                              "required": true
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "question1",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question2",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question3",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question4",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question5",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question6",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question7",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question8",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "question9",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "truefalse1",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "truefalse2",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "truefalse3",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "datetime1",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "datetime2",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "datetime3",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "number1",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "number2",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "number3",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "questions",
+                  "type": "json",
+                  "required": false
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "listcampaigns": {
+      "object": {
+        "entity": {
+          "name": "campaign",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "owner",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "person",
+                "description": "person",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "unique_person_id",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "email",
+                    "type": "string",
+                    "required": true
+                  }
+                ]
+              }
+            }
+          ]
+        },
+        "relations": [
+          {
+            "name": "person",
+            "entity": {
+              "name": "person",
+              "description": "person",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "unique_person_id",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "email",
+                  "type": "string",
+                  "required": true
+                }
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "listsurveys": {
+      "object": {
+        "entity": {
+          "name": "survey",
+          "baselineattributes": [
+            {
+              "name": "tenant",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "name",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "description",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "url",
+              "type": "string",
+              "required": true
+            }
+          ],
+          "additionalattributes": [
+            {
+              "name": "key",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "displayname",
+              "type": "string",
+              "required": true
+            },
+            {
+              "name": "owner",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "person",
+                "description": "person",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "unique_person_id",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "email",
+                    "type": "string",
+                    "required": true
+                  }
+                ]
+              }
+            },
+            {
+              "name": "campaign",
+              "required": false,
+              "type": "reference",
+              "entity": {
+                "name": "campaign",
+                "baselineattributes": [
+                  {
+                    "name": "tenant",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "name",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "description",
+                    "type": "string",
+                    "required": false
+                  },
+                  {
+                    "name": "url",
+                    "type": "string",
+                    "required": true
+                  }
+                ],
+                "additionalattributes": [
+                  {
+                    "name": "key",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "displayname",
+                    "type": "string",
+                    "required": true
+                  },
+                  {
+                    "name": "owner",
+                    "required": false,
+                    "type": "reference",
+                    "entity": {
+                      "name": "person",
+                      "description": "person",
+                      "baselineattributes": [
+                        {
+                          "name": "tenant",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "name",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "description",
+                          "type": "string",
+                          "required": false
+                        }
+                      ],
+                      "additionalattributes": [
+                        {
+                          "name": "unique_person_id",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "displayname",
+                          "type": "string",
+                          "required": true
+                        },
+                        {
+                          "name": "email",
+                          "type": "string",
+                          "required": true
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "name": "question1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question4",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question5",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question6",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question7",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question8",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "question9",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "truefalse3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "datetime1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "datetime2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "datetime3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "number1",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "number2",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "number3",
+              "type": "string",
+              "required": false
+            },
+            {
+              "name": "questions",
+              "type": "json",
+              "required": false
+            }
+          ]
+        },
+        "relations": [
+          {
+            "name": "person",
+            "entity": {
+              "name": "person",
+              "description": "person",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "unique_person_id",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "email",
+                  "type": "string",
+                  "required": true
+                }
+              ]
+            }
+          },
+          {
+            "name": "campaign",
+            "entity": {
+              "name": "campaign",
+              "baselineattributes": [
+                {
+                  "name": "tenant",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "name",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "description",
+                  "type": "string",
+                  "required": false
+                },
+                {
+                  "name": "url",
+                  "type": "string",
+                  "required": true
+                }
+              ],
+              "additionalattributes": [
+                {
+                  "name": "key",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "displayname",
+                  "type": "string",
+                  "required": true
+                },
+                {
+                  "name": "owner",
+                  "required": false,
+                  "type": "reference",
+                  "entity": {
+                    "name": "person",
+                    "description": "person",
+                    "baselineattributes": [
+                      {
+                        "name": "tenant",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "name",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "description",
+                        "type": "string",
+                        "required": false
+                      }
+                    ],
+                    "additionalattributes": [
+                      {
+                        "name": "unique_person_id",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "displayname",
+                        "type": "string",
+                        "required": true
+                      },
+                      {
+                        "name": "email",
+                        "type": "string",
+                        "required": true
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
 }

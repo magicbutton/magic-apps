@@ -27,7 +27,7 @@ type Campaign struct {
     Url string `bun:"url"`
     Key string `bun:"key"`
     Displayname string `bun:"displayname"`
-    Person_id int `bun:"person_id"`
+    Owner_id int `bun:"owner_id"`
 
 }
 

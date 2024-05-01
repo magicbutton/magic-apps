@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/magicbutton/magic-apps/services/models/applicationmodel"
+	"github.com/magicbutton/magic-apps/services/models/surveyresponsemodel"
 )
 
 func UnmarshalPerson(data []byte) (Person, error) {
@@ -26,14 +27,15 @@ func (r *Person) Marshal() ([]byte, error) {
 }
 
 type Person struct {
-	ID               int                            `json:"id"`
-	CreatedAt        time.Time                      `json:"created_at"`
-	UpdatedAt        time.Time                      `json:"updated_at"`
-	Tenant           string                         `json:"tenant"`
-	Name             string                         `json:"name"`
-	Description      string                         `json:"description"`
-	Unique_Person_Id string                         `json:"unique_person_id"`
-	Displayname      string                         `json:"displayname"`
-	Email            string                         `json:"email"`
-	Applications     []applicationmodel.Application `json:"applications"`
+	ID               int                                  `json:"id"`
+	CreatedAt        time.Time                            `json:"created_at"`
+	UpdatedAt        time.Time                            `json:"updated_at"`
+	Tenant           string                               `json:"tenant"`
+	Name             string                               `json:"name"`
+	Description      string                               `json:"description"`
+	Unique_Person_Id string                               `json:"unique_person_id"`
+	Displayname      string                               `json:"displayname"`
+	Email            string                               `json:"email"`
+	Applications     []applicationmodel.Application       `json:"applications"`
+	SurveyResponses  []surveyresponsemodel.SurveyResponse `json:"survey_responses"`
 }

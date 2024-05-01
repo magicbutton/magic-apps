@@ -12,9 +12,7 @@ import (
 	//"encoding/json"
 	//"time"
 	"github.com/magicbutton/magic-apps/database"
-	"github.com/magicbutton/magic-apps/database/databasetypes"
 	"github.com/magicbutton/magic-apps/services/models/applicationmodel"
-	"github.com/magicbutton/magic-apps/utils"
 )
 
 func MapApplicationOutgoing(item database.Application) applicationmodel.Application {
@@ -27,9 +25,7 @@ func MapApplicationOutgoing(item database.Application) applicationmodel.Applicat
 		Description: item.Description,
 		Key:         item.Key,
 		Displayname: item.Displayname,
-		Owner: databasetypes.Reference{
-			ID: string(item.Owner_id),
-		},
+		Owner_id:    item.Owner_id,
 	}
 }
 
@@ -42,6 +38,6 @@ func MapApplicationIncoming(item applicationmodel.Application) database.Applicat
 		Description: item.Description,
 		Key:         item.Key,
 		Displayname: item.Displayname,
-		Owner_id:    utils.StrToInt(item.Owner.ID),
+		Owner_id:    item.Owner_id,
 	}
 }

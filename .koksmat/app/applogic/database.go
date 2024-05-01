@@ -39,14 +39,19 @@ func Search[DB interface{}, DOC interface{}](fieldname string, query string, map
 		return nil, err
 	}
 	items := []DOC{}
-	for _, item := range result {
+	pageSize := 500
+
+	for index, item := range result {
+		if index >= pageSize {
+			break
+		}
 		mappedItem := mapper(item)
 		items = append(items, mappedItem)
 	}
 
 	page := utils.Page[DOC]{
 		Items:       items,
-		TotalPages:  1,
+		TotalPages:  (len(items) / pageSize) + 1,
 		TotalItems:  len(items),
 		CurrentPage: 0,
 	}
@@ -68,6 +73,22 @@ func Select[DB interface{}, DOC interface{}](query string, mapper func(DB) DOC, 
 
 	return &items, nil
 }
+func SelectDistinct[DB interface{}, DOC interface{}](query string, mapper func(DB) DOC, columns []string, args ...interface{}) (*[]DOC, error) {
+
+	result, err := dbhelpers.SelectDistinct[DB](query, columns, args...)
+
+	if err != nil {
+		return nil, err
+	}
+	items := []DOC{}
+	for _, item := range result {
+		mappedItem := mapper(item)
+		items = append(items, mappedItem)
+	}
+
+	return &items, nil
+}
+
 func Create[DB interface{}, DOC interface{}](item DOC, mapperIncoming func(DOC) DB, mapperOutgoing func(DB) DOC) (*DOC, error) {
 
 	dbItem := mapperIncoming(item)

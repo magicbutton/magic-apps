@@ -39,27 +39,33 @@ export interface Owner {
 }
 
 import { useService } from "@/koksmat/useservice";
+import ErrorMessage from "../../../../koksmat/components/errormessage";
+import { Label } from "@/components/ui/label";
+import { Switch } from "@/components/ui/switch";
+
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 function App(props: { app: Application }) {
   return (
     <div>
-      <div>{props.app.displayname}</div>
+      <div>{props.app.displayname} </div>
     </div>
   );
 }
 
-export default function OwnerPage(props: { params: { id: string } }) {
-  const { id } = props.params;
+export default function OwnerPage(props: { params: { owner_id: string } }) {
+  const { owner_id } = props.params;
   const { data, error, isLoading } = useService<Data>(
     "magic-apps.person",
-    ["read", id],
+    ["read", owner_id],
     "",
     600,
     "x"
   );
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <ErrorMessage message={error} />;
   }
   if (!data) {
     return <div>Loading...</div>;
@@ -77,14 +83,23 @@ export default function OwnerPage(props: { params: { id: string } }) {
           verify your account and provide the best experience.
         </p>
       </div>
-
-      {owner?.applications
-        .sort((a, b) => a.displayname.localeCompare(b.displayname))
-        .map((app, index) => (
-          <div key={index}>
-            <App app={app} />
-          </div>
-        ))}
+      <div className="mt-4 flex">
+        <div>
+          {owner?.applications
+            .sort((a, b) => a.displayname.localeCompare(b.displayname))
+            .map((app, index) => (
+              <div key={index}>
+                <App app={app} />
+              </div>
+            ))}
+        </div>
+        <div className="grow"></div>
+        <div>
+          <Link href={`/apps/owner/${owner_id}/survey`}>
+            <Button variant="default">Surveys</Button>
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }

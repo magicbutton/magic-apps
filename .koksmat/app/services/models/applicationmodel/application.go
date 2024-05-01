@@ -10,7 +10,7 @@ package applicationmodel
 import (
 	"encoding/json"
 	"time"
-    "github.com/magicbutton/magic-apps/database/databasetypes"
+    // "github.com/magicbutton/magic-apps/database/databasetypes"
 )
 
 func UnmarshalApplication(data []byte) (Application, error) {
@@ -33,7 +33,7 @@ type Application struct {
     Key string `json:"key"`
     Displayname string `json:"displayname"`
     Imported_Ownername string `json:"imported_ownername"`
-    Owner databasetypes.Reference `json:"owner"`
+    Owner_id int `json:"owner_id"`
 
 }
 

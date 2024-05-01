@@ -27,6 +27,7 @@ func MapCampaignOutgoing(db database.Campaign) campaignmodel.Campaign {
         Url : db.Url,
         Key : db.Key,
         Displayname : db.Displayname,
+                Owner_id : db.Owner_id,
 
     }
 }
@@ -42,6 +43,7 @@ func MapCampaignIncoming(in campaignmodel.Campaign) database.Campaign {
         Url : in.Url,
         Key : in.Key,
         Displayname : in.Displayname,
+                Owner_id : in.Owner_id,
 
     }
 }

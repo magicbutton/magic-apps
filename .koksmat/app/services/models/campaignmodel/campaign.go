@@ -10,7 +10,7 @@ package campaignmodel
 import (
 	"encoding/json"
 	"time"
-    "github.com/magicbutton/magic-apps/database/databasetypes"
+    // "github.com/magicbutton/magic-apps/database/databasetypes"
 )
 
 func UnmarshalCampaign(data []byte) (Campaign, error) {
@@ -33,7 +33,7 @@ type Campaign struct {
     Url string `json:"url"`
     Key string `json:"key"`
     Displayname string `json:"displayname"`
-    Person databasetypes.Reference `json:"person"`
+    Owner_id int `json:"owner_id"`
 
 }
 

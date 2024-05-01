@@ -88,7 +88,7 @@ entities:
       - name: displayname
         type: string
         required: true
-      - name: person
+      - name: owner
         required: false
         type: reference
         entity: *person
@@ -96,22 +96,78 @@ entities:
         required: false
         type: reference
         entity: *campaign
-      - name: questions
+      - name: question1
         type: string
-        required: true
-
+        required: false
+      - name: question2
+        type: string
+        required: false
+      - name: question3
+        type: string
+        required: false
+      - name: question4
+        type: string
+        required: false
+      - name: question5
+        type: string
+        required: false
+      - name: question6
+        type: string
+        required: false
+      - name: question7
+        type: string
+        required: false
+      - name: question8
+        type: string
+        required: false
+      - name: question9
+        type: string
+        required: false
+      - name: truefalse1
+        type: string
+        required: false
+      - name: truefalse2
+        type: string
+        required: false
+      - name: truefalse3
+        type: string
+        required: false
+      - name: datetime1
+        type: string
+        required: false
+      - name: datetime2
+        type: string
+        required: false
+      - name: datetime3
+        type: string
+        required: false
+      - name: number1
+        type: string
+        required: false
+      - name: number2
+        type: string
+        required: false
+      - name: number3
+        type: string
+        required: false
+      - name: questions
+        type: json
+        required: false
   surveyresponse: &surveyresponse
     name: surveyresponse
 
     baselineattributes: *recordAttributesWithURL
     additionalattributes:
+      - name: responsedate
+        type: datetime
+        required: false
       - name: key
         type: string
         required: true
       - name: displayname
         type: string
         required: true
-      - name: person
+      - name: respondent
         required: false
         type: reference
         entity: *person
@@ -119,12 +175,72 @@ entities:
         required: false
         type: reference
         entity: *survey
+      - name: application
+        required: false
+        type: reference
+        entity: *application
       - name: questions
-        type: string
-        required: true
+        type: json
+        required: false
       - name: answers
+        type: json
+        required: false
+      - name: answer1
         type: string
-        required: true
+        required: false
+      - name: answer2
+        type: string
+        required: false
+      - name: answer3
+        type: string
+        required: false
+      - name: answer4
+        type: string
+        required: false
+      - name: answer5
+        type: string
+        required: false
+      - name: answer6
+        type: string
+        required: false
+      - name: answer7
+        type: string
+        required: false
+      - name: answer8
+        type: string
+        required: false
+      - name: answer9
+        type: string
+        required: false
+      - name: truefalse1
+        type: boolean
+        required: false
+      - name: truefalse2
+        type: boolean
+        required: false
+      - name: truefalse3
+        type: boolean
+        required: false
+      - name: datetime1
+        type: datetime
+        required: false
+      - name: datetime2
+
+        type: datetime
+        required: false
+      - name: datetime3
+        type: datetime
+        required: false
+      - name: number1
+        type: int
+        required: false
+      - name: number2
+        type: int
+        required: false
+
+      - name: number3
+        type: int
+        required: false
 
   # Use for storing sites, folders etc.
 

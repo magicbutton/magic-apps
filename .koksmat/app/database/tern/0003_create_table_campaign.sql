@@ -21,13 +21,13 @@ CREATE TABLE public.campaign
     ,url character varying COLLATE pg_catalog."default"  NOT NULL
     ,key character varying COLLATE pg_catalog."default"  NOT NULL
     ,displayname character varying COLLATE pg_catalog."default"  NOT NULL
-    ,person_id int  
+    ,owner_id int  
 
 
 );
 
                 ALTER TABLE IF EXISTS public.campaign
-                ADD FOREIGN KEY (person_id)
+                ADD FOREIGN KEY (owner_id)
                 REFERENCES public.person (id) MATCH SIMPLE
                 ON UPDATE NO ACTION
                 ON DELETE NO ACTION

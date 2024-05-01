@@ -10,7 +10,7 @@ package surveymodel
 import (
 	"encoding/json"
 	"time"
-    "github.com/magicbutton/magic-apps/database/databasetypes"
+    // "github.com/magicbutton/magic-apps/database/databasetypes"
 )
 
 func UnmarshalSurvey(data []byte) (Survey, error) {
@@ -33,9 +33,27 @@ type Survey struct {
     Url string `json:"url"`
     Key string `json:"key"`
     Displayname string `json:"displayname"`
-    Person databasetypes.Reference `json:"person"`
-    Campaign databasetypes.Reference `json:"campaign"`
-    Questions string `json:"questions"`
+    Owner_id int `json:"owner_id"`
+    Campaign_id int `json:"campaign_id"`
+    Question1 string `json:"question1"`
+    Question2 string `json:"question2"`
+    Question3 string `json:"question3"`
+    Question4 string `json:"question4"`
+    Question5 string `json:"question5"`
+    Question6 string `json:"question6"`
+    Question7 string `json:"question7"`
+    Question8 string `json:"question8"`
+    Question9 string `json:"question9"`
+    Truefalse1 string `json:"truefalse1"`
+    Truefalse2 string `json:"truefalse2"`
+    Truefalse3 string `json:"truefalse3"`
+    Datetime1 string `json:"datetime1"`
+    Datetime2 string `json:"datetime2"`
+    Datetime3 string `json:"datetime3"`
+    Number1 string `json:"number1"`
+    Number2 string `json:"number2"`
+    Number3 string `json:"number3"`
+    Questions interface{} `json:"questions"`
 
 }
 

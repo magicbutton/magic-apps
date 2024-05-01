@@ -74,6 +74,7 @@ import {
 } from "@/components/ui/tooltip";
 
 import Link from "next/link";
+import DarkModeToggle from "@/components/darkmodetoggle";
 
 export default function AppLeftRail(props: {}) {
   return (
@@ -90,7 +91,7 @@ export default function AppLeftRail(props: {}) {
           <Tooltip>
             <TooltipTrigger asChild>
               <Link
-                href="#"
+                href="/apps"
                 className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
               >
                 <Home className="h-5 w-5" />
@@ -149,6 +150,7 @@ export default function AppLeftRail(props: {}) {
           </Tooltip>*/}
         </nav>
         <nav className="mt-auto flex flex-col items-center gap-4 px-2 sm:py-5">
+          <DarkModeToggle />
           <Tooltip>
             <TooltipTrigger asChild>
               <Link

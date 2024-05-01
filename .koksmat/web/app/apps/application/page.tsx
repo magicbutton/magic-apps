@@ -21,14 +21,14 @@ export interface Item {
 }
 
 import { useService } from "@/koksmat/useservice";
-import ErrorMessage from "@/koksmat/components/errormessage";
+import ErrorMessage from "../../../koksmat/components/errormessage";
 
-function Owner(props: { owner: Item }) {
-  const { owner } = props;
+function Item(props: { item: Item }) {
+  const { item } = props;
   return (
     <div>
-      <a href={"/apps/owner/" + owner.id} className="text-blue-600">
-        {owner.displayname}
+      <a href={"/apps/application/" + item.id} className="text-blue-600">
+        {item.displayname}
       </a>
     </div>
   );
@@ -36,14 +36,18 @@ function Owner(props: { owner: Item }) {
 
 export default function Owners() {
   const { data, error, isLoading } = useService<Output>(
-    "magic-apps.person",
-    ["search", "%"],
+    "magic-apps.application",
+    ["search", "%voice%"],
     "",
     600,
     "x"
   );
+
   if (error) {
     return <ErrorMessage message={error} />;
+  }
+  if (!data) {
+    return <div>Loading...</div>;
   }
 
   const owners: Output = data;
@@ -51,20 +55,15 @@ export default function Owners() {
     <div>
       <div className="space-y-4">
         <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">
-          Applications owners
+          Applications
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-[650px] text-lg md:text-xl">
-          Select the applications you own from the list below. This will help us
-          verify your account and provide the best experience.
-        </p>
       </div>
-      {!data && <div>Loading...</div>}
 
-      {owners?.items
+      {owners.items
         .sort((a, b) => a.displayname.localeCompare(b.displayname))
-        .map((owner, index) => (
+        .map((item, index) => (
           <div key={index}>
-            <Owner owner={owner} />
+            <Item item={item} />
           </div>
         ))}
     </div>
