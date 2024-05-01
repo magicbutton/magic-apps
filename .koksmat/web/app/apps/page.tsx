@@ -42,7 +42,7 @@ export default function Component() {
     <main className="grid flex-1 items-start gap-4 p-4 sm:px-6 sm:py-0 md:gap-8 lg:grid-cols-3 xl:grid-cols-3">
       <div className="grid auto-rows-max items-start gap-4 md:gap-8 lg:col-span-2">
         <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-2 xl:grid-cols-4">
-          <Link href="/apps/application">
+          <Link href="/apps/application" className="cursor-pointer">
             <Card x-chunk="dashboard-05-chunk-1">
               <CardHeader className="pb-2">
                 <CardDescription>Number of applications</CardDescription>
@@ -60,7 +60,7 @@ export default function Component() {
               </CardFooter>
             </Card>
           </Link>
-          <Link href="/apps/owner">
+          <Link href="/apps/owner" className="cursor-pointer">
             <Card x-chunk="dashboard-05-chunk-1">
               <CardHeader className="pb-2">
                 <CardDescription>Number of owners</CardDescription>
@@ -81,6 +81,7 @@ export default function Component() {
           {appDashboardService?.data?.person_id > -1 && (
             <Fragment>
               <Link
+                className="cursor-pointer"
                 href={`/apps/owner/${appDashboardService?.data?.person_id}`}
               >
                 <Card x-chunk="dashboard-05-chunk-1">
@@ -102,6 +103,7 @@ export default function Component() {
               </Link>
               <Link
                 href={`/apps/owner/${appDashboardService?.data?.person_id}/survey`}
+                className="cursor-pointer"
               >
                 <Card x-chunk="dashboard-05-chunk-1">
                   <CardHeader className="pb-2">
