@@ -1,6 +1,15 @@
 "use client";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 export interface Survey {
   id: number;
   created_at: string;
@@ -88,6 +97,7 @@ import { useService } from "@/koksmat/useservice";
 import ErrorMessage from "@/koksmat/components/errormessage";
 import { Fragment, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
+import { run } from "@/koksmat/magicservices";
 
 export default function ResponseSurveys(props: {
   params: { owner_id: string; survey_id: string };
@@ -113,6 +123,21 @@ export default function ResponseSurveys(props: {
   const [allanswered, setallanswered] = useState(false);
 
   const [responses, setresponses] = useState<SurveyResponse[]>([]);
+  const submit = async () => {
+    const sendResult = await run(
+      "magic-apps.surveyresponse",
+      ["submit", JSON.stringify(responses)],
+      "",
+      60,
+      "x"
+    );
+
+    if (sendResult.hasError) {
+      console.log(sendResult.errorMessage);
+    } else {
+      console.log("success");
+    }
+  };
 
   useEffect(() => {
     if (!survey) return;
@@ -122,6 +147,8 @@ export default function ResponseSurveys(props: {
   if (error) {
     return <ErrorMessage message={error} />;
   }
+
+  const person = data;
   return (
     <div>
       <div className="space-y-4">
@@ -129,71 +156,106 @@ export default function ResponseSurveys(props: {
           {survey?.displayname}
         </h1>
         <p className="text-gray-500 dark:text-gray-400 max-w-[650px] text-lg md:text-xl">
-          Here is a list of the responses to the survey
+          Here is a list of apps recorded as owned by {person?.displayname}{" "}
         </p>
       </div>
-      <div className="mt-5">
+      <div className="flex items-center space-x-2 mt-6">
+        <Button
+          variant="secondary"
+          onClick={() => {
+            responses.map((response) => {
+              response.truefalse1 = true;
+            });
+
+            setversion(version + 1);
+            setresponses(responses);
+          }}
+        >
+          Yes to all
+        </Button>
+        <Button
+          variant="secondary"
+          onClick={() => {
+            responses.map((response) => {
+              response.truefalse1 = false;
+            });
+
+            setversion(version + 1);
+            setresponses(responses);
+          }}
+        >
+          No to all
+        </Button>
+        <div className="grow"></div>
+        <div className="flex items-center space-x-2">
+          <Switch
+            id="airplane-mode"
+            checked={allanswered}
+            onCheckedChange={() => {
+              setallanswered(!allanswered);
+            }}
+          />
+          <Label htmlFor="airplane-mode">All have been answered</Label>
+        </div>
+        <Button
+          disabled={!allanswered}
+          onClick={() => {
+            submit();
+          }}
+        >
+          Send
+        </Button>
+      </div>
+      <div className="mt-5 border rounded-lg p-10">
         {!data && <div>Loading...</div>}
+
         <div>
-          <div className="flex items-center space-x-2">
-            <Button
-              variant="secondary"
-              onClick={() => {
-                responses.map((response) => {
-                  response.truefalse1 = true;
-                });
-
-                setversion(version + 1);
-                setresponses(responses);
-              }}
-            >
-              Yes to all
-            </Button>
-            <Button
-              variant="secondary"
-              onClick={() => {
-                responses.map((response) => {
-                  response.truefalse1 = false;
-                });
-
-                setversion(version + 1);
-                setresponses(responses);
-              }}
-            >
-              No to all
-            </Button>
-            <div className="grow"></div>
-            <div className="flex items-center space-x-2">
-              <Switch
-                id="airplane-mode"
-                checked={allanswered}
-                onCheckedChange={() => {
-                  setallanswered(!allanswered);
-                }}
-              />
-              <Label htmlFor="airplane-mode">All have been answered</Label>
-            </div>
-            <Button disabled={!allanswered}>Send</Button>
-          </div>
-          <table>
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th>{survey?.truefalse1}</th>
-              </tr>
-            </thead>
-            <div className="">{version}</div>
+          <div className="hidden">{version}</div>
+          <div className="columns-1 md:columns-2 xl:columns-3 space-y-3">
             {responses
               .sort((a, b) => a.displayname.localeCompare(b.displayname))
               .map((response, index) => (
-                <tr key={index}>
-                  <td>
-                    {" "}
+                <Card key={index}>
+                  <CardHeader>
+                    <CardTitle>{response.displayname}</CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex items-center space-x-2">
+                      <Switch
+                        className="pointer "
+                        id={"survey_response" + response.id}
+                        checked={response.truefalse1}
+                        onCheckedChange={(e) => {
+                          response.truefalse1 = e;
+                          setversion(version + 1);
+                          setresponses(responses);
+                        }}
+                      />
+                      <Label
+                        className="pointer "
+                        htmlFor={"survey_response" + response.id}
+                      >
+                        {survey?.truefalse1}
+                      </Label>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/**
+ * <tr key={index}>
+                  
+                
                     <Label htmlFor={"survey_response" + response.id}>
                       {response.displayname}
                     </Label>
-                  </td>
-                  <td>
+             
                     <Switch
                       id={"survey_response" + response.id}
                       checked={response.truefalse1}
@@ -203,12 +265,5 @@ export default function ResponseSurveys(props: {
                         setresponses(responses);
                       }}
                     />
-                  </td>
-                </tr>
-              ))}
-          </table>
-        </div>
-      </div>
-    </div>
-  );
-}
+              
+ */

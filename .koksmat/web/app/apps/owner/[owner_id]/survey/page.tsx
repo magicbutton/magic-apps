@@ -71,7 +71,10 @@ function Survey(props: { response: SurveyResponse }) {
     console.log(survey);
   }
   return (
-    <Link href={`/apps/owner/${respondent_id}/survey/${survey_id}`}>
+    <Link
+      className="hover:underline cursor-pointer text-blue-500 dark:text-blue-400 text-xl"
+      href={`/apps/owner/${respondent_id}/survey/${survey_id}`}
+    >
       <div>{survey?.displayname}</div>
     </Link>
   );
@@ -96,22 +99,22 @@ export default function ResponseSurveys(props: {
   return (
     <div>
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">
-          Responses
-        </h1>
+        <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">Surveys</h1>
         <p className="text-gray-500 dark:text-gray-400 max-w-[650px] text-lg md:text-xl">
-          Here is a list of the responses to the survey
+          Here is a list of the surveys which you are involved in
         </p>
       </div>
-      {!data && <div>Loading...</div>}
+      <div className="mt-6">
+        {!data && <div>Loading...</div>}
 
-      {responses?.survey_responses
-        .sort((a, b) => a.displayname.localeCompare(b.displayname))
-        .map((response, index) => (
-          <div key={index}>
-            <Survey response={response} />
-          </div>
-        ))}
+        {responses?.survey_responses
+          .sort((a, b) => a.displayname.localeCompare(b.displayname))
+          .map((response, index) => (
+            <div key={index}>
+              <Survey response={response} />
+            </div>
+          ))}
+      </div>
     </div>
   );
 }

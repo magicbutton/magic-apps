@@ -25,9 +25,8 @@ export default function Layout(props: { children: any }) {
             <Button
               onClick={async () => {
                 const signedIn = await magicbox.signIn(["User.Read"], "");
-                if (signedIn) {
-                  magicbox.refresh;
-                }
+
+                magicbox.refresh();
               }}
             >
               Sign In using Microsoft 365 account

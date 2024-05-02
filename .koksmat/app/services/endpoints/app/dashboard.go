@@ -11,6 +11,7 @@ package app
 // noma2
 import (
 	"context"
+	"fmt"
 	"log"
 
 	"github.com/magicbutton/magic-apps/services/endpoints/person"
@@ -42,12 +43,12 @@ func GlobalDashboard(email string) (*models.Dashboard, error) {
 	var person_id int = -1
 	var numberOfAppsOwned int = 0
 	var numberOfSurveyResponses int = 0
-	personSearchResult, err := person.PersonSearch(("email:" + email))
+	personSearchResult, err := person.PersonSearch(("%email:" + email + "%"))
 	if err == nil {
 		if personSearchResult.TotalItems > 0 {
 			person_id = personSearchResult.Items[0].ID
-			// numberOfAppsOwned = GetCount(fmt.Sprintf("SELECT COUNT(*) as count FROM public.application  where owner_id = %d ", person_id))
-			// numberOfSurveyResponses = GetCount(fmt.Sprintf("SELECT COUNT(*) as count FROM public.surveyresponse  where respondent_id = %d AND responsedate is null", person_id))
+			numberOfAppsOwned = GetCount(fmt.Sprintf("SELECT COUNT(*) as count FROM public.application  where owner_id = %d ", person_id))
+			numberOfSurveyResponses = GetCount(fmt.Sprintf("SELECT COUNT(*) as count FROM public.surveyresponse  where respondent_id = %d AND responsedate is null", person_id))
 		}
 	}
 
