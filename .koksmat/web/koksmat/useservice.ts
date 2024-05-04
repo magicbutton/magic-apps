@@ -19,7 +19,7 @@ export function useService<T>(
   setresult?: (result: Result<T>) => void,
   debug?: boolean
 ) {
-  const [data, setdata] = useState<any>();
+  const [data, setdata] = useState<T>();
   const [isLoading, setisLoading] = useState(false);
   const [error, seterror] = useState("");
   const [didRun, setdidRun] = useState(false);

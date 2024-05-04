@@ -47,7 +47,7 @@ export default function Owners() {
     return <ErrorMessage message={error} />;
   }
 
-  const owners: Output = data;
+  const owners: Output = data!;
   return (
     <div>
       <div className="space-y-4">

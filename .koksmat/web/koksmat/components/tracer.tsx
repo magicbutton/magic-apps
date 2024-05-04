@@ -12,6 +12,7 @@ import {
 } from "@/components/ui/dialog";
 import { Service } from "nats";
 import { useService } from "../useservice";
+import { Button } from "@/components/ui/button";
 
 function ShowLogEntryDetails(props: {
   entry: ServiceCallLogEntry;
@@ -20,14 +21,56 @@ function ShowLogEntryDetails(props: {
   isOpen: boolean;
 }) {
   const { entry, dialogChange, isOpen } = props;
+  const [showResponse, setshowResponse] = useState(false);
 
   return (
     <Dialog onOpenChange={dialogChange} open={isOpen}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle></DialogTitle>
-          <DialogDescription className="p-2">
-            <pre>{JSON.stringify(entry, null, 2)}</pre>
+          <DialogTitle>{entry.servicename}</DialogTitle>
+          <DialogDescription className="p-2 overflow-scroll">
+            <div>Arguments</div>
+            <div>{entry.request.args.join(",")}</div>
+
+            <div>
+              <Button
+                onClick={() => {
+                  setshowResponse(!showResponse);
+                }}
+                variant={"link"}
+              >
+                Show response
+              </Button>
+              <Button
+                onClick={async () => {
+                  navigator.clipboard
+                    .writeText(
+                      JSON.stringify(
+                        entry.response.data ?? "No data - sorry",
+                        null,
+                        2
+                      )
+                    )
+                    .then(() => {
+                      console.log("copied");
+                    })
+                    .catch((error) => {
+                      console.error("copy failed", error);
+                    });
+                }}
+                variant={"link"}
+              >
+                Copy to clipboard
+              </Button>
+            </div>
+            <div></div>
+            <div></div>
+
+            {showResponse && (
+              <div className="max-h-96">
+                <pre>{JSON.stringify(entry.response, null, 2)}</pre>
+              </div>
+            )}
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

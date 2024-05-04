@@ -66,7 +66,7 @@ function Survey(props: { response: SurveyResponse }) {
   if (error) {
     return <ErrorMessage message={error} />;
   }
-  const survey: Root = data;
+  const survey: Root = data!;
   if (survey) {
     console.log(survey);
   }
@@ -95,7 +95,7 @@ export default function ResponseSurveys(props: {
     return <ErrorMessage message={error} />;
   }
 
-  const responses: Root = data;
+  const responses: Root = data!;
   return (
     <div>
       <div className="space-y-4">

@@ -19,6 +19,7 @@ import Link from "next/link";
 import { useService } from "@/koksmat/useservice";
 import { Fragment, useContext } from "react";
 import { MagicboxContext } from "@/koksmat/magicbox-context";
+import { Overview } from "./components/stats";
 
 export interface Dashboard {
   person_id: number;
@@ -78,7 +79,7 @@ export default function Component() {
               </CardFooter>
             </Card>
           </Link>
-          {appDashboardService?.data?.person_id > -1 && (
+          {appDashboardService?.data?.person_id! > -1 && (
             <Fragment>
               <Link
                 className="cursor-pointer"
