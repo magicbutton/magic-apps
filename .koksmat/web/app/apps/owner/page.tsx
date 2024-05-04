@@ -22,14 +22,15 @@ export interface Item {
 
 import { useService } from "@/koksmat/useservice";
 import ErrorMessage from "@/koksmat/components/errormessage";
+import Link from "next/link";
 
 function Owner(props: { owner: Item }) {
   const { owner } = props;
   return (
     <div>
-      <a href={"/apps/owner/" + owner.id} className="text-blue-600">
+      <Link href={"/apps/owner/" + owner.id} className="text-blue-600">
         {owner.displayname}
-      </a>
+      </Link>
     </div>
   );
 }

@@ -9,6 +9,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { useToast } from "@/components/ui/use-toast";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 export interface Survey {
   id: number;
@@ -98,10 +107,76 @@ import ErrorMessage from "@/koksmat/components/errormessage";
 import { Fragment, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { run } from "@/koksmat/magicservices";
+import { toast } from "@/components/ui/use-toast";
+import { ToastAction } from "@/components/ui/toast";
+
+function YesNo(props: {
+  id: string;
+  question: string;
+  checked: boolean;
+  onChange: (value: boolean) => void;
+}) {
+  const { id, question, checked, onChange } = props;
+  return (
+    <div className="space-y-3">
+      <div className="bold">{question}</div>
+      <div className="flex items-center space-x-2">
+        <Switch
+          className="pointer "
+          id={"survey_response" + id}
+          checked={checked}
+          onCheckedChange={onChange}
+        />
+        <Label
+          className="pointer text-sm text-slate-500"
+          htmlFor={"survey_response" + id}
+        >
+          Turn on to answer yes or off to answer no.
+        </Label>
+      </div>
+    </div>
+  );
+}
+
+function SendResponse(props: {
+  owner_id: string;
+  survey_id: string;
+  responses: SurveyResponse[];
+  dialogChange: (open: boolean) => void;
+  isOpen: boolean;
+}) {
+  const { owner_id, survey_id, responses, dialogChange, isOpen } = props;
+  const submitResult = useService<any>(
+    "magic-apps.person",
+    ["withsurveyresponses", owner_id, survey_id],
+    "",
+    600,
+    "x"
+  );
+  return (
+    <Dialog onOpenChange={dialogChange} open={isOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle></DialogTitle>
+          <DialogDescription className="p-20">
+            {submitResult.isLoading && <div>Sending...</div>}
+            {submitResult.error && (
+              <div className="text-red-500">{submitResult.error}</div>
+            )}
+            {submitResult.data && (
+              <div className="text-xl">Responses have been received</div>
+            )}
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
+  );
+}
 
 export default function ResponseSurveys(props: {
   params: { owner_id: string; survey_id: string };
 }) {
+  const { toast } = useToast();
   const { owner_id, survey_id } = props.params;
   const { data, error, isLoading } = useService<Root>(
     "magic-apps.person",
@@ -123,20 +198,9 @@ export default function ResponseSurveys(props: {
   const [allanswered, setallanswered] = useState(false);
 
   const [responses, setresponses] = useState<SurveyResponse[]>([]);
+  const [submitting, setsubmitting] = useState(false);
   const submit = async () => {
-    const sendResult = await run(
-      "magic-apps.surveyresponse",
-      ["submit", JSON.stringify(responses)],
-      "",
-      60,
-      "x"
-    );
-
-    if (sendResult.hasError) {
-      console.log(sendResult.errorMessage);
-    } else {
-      console.log("success");
-    }
+    setsubmitting(true);
   };
 
   useEffect(() => {
@@ -156,7 +220,8 @@ export default function ResponseSurveys(props: {
           {survey?.displayname}
         </h1>
         <p className="text-gray-500 dark:text-gray-400 max-w-[650px] text-lg md:text-xl">
-          Here is a list of apps recorded as owned by {person?.displayname}{" "}
+          Here is a list of apps recorded as owned by{" "}
+          <b> {person?.displayname} </b>
         </p>
       </div>
       <div className="flex items-center space-x-2 mt-6">
@@ -205,13 +270,24 @@ export default function ResponseSurveys(props: {
         >
           Send
         </Button>
+        {submitting && (
+          <SendResponse
+            owner_id={owner_id}
+            survey_id={survey_id}
+            responses={responses}
+            dialogChange={(onoff) => {
+              setsubmitting(onoff);
+            }}
+            isOpen={submitting}
+          />
+        )}
       </div>
       <div className="mt-5 border rounded-lg p-10">
         {!data && <div>Loading...</div>}
 
         <div>
           <div className="hidden">{version}</div>
-          <div className="columns-1 md:columns-2 xl:columns-3 space-y-3">
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 space-y-3 space-x-3">
             {responses
               .sort((a, b) => a.displayname.localeCompare(b.displayname))
               .map((response, index) => (
@@ -220,24 +296,27 @@ export default function ResponseSurveys(props: {
                     <CardTitle>{response.displayname}</CardTitle>
                   </CardHeader>
                   <CardContent>
-                    <div className="flex items-center space-x-2">
-                      <Switch
-                        className="pointer "
-                        id={"survey_response" + response.id}
-                        checked={response.truefalse1}
-                        onCheckedChange={(e) => {
-                          response.truefalse1 = e;
-                          setversion(version + 1);
-                          setresponses(responses);
-                        }}
-                      />
-                      <Label
-                        className="pointer "
-                        htmlFor={"survey_response" + response.id}
-                      >
-                        {survey?.truefalse1}
-                      </Label>
-                    </div>
+                    <YesNo
+                      id={response.id.toString()}
+                      question={survey.truefalse1}
+                      checked={response.truefalse1}
+                      onChange={(value) => {
+                        response.truefalse1 = value;
+                        setversion(version + 1);
+                        setresponses(responses);
+                      }}
+                    />
+                    <YesNo
+                      id={"q2" + response.id.toString()}
+                      question={survey.truefalse2}
+                      checked={response.truefalse2}
+                      onChange={(value) => {
+                        response.truefalse2 = value;
+                        setversion(version + 1);
+                        setresponses(responses);
+                      }}
+                    />
+                    <div className="text-xs">{response.responsedate}</div>
                   </CardContent>
                 </Card>
               ))}

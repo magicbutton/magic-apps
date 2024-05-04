@@ -7,6 +7,7 @@ import { TailwindIndicator } from "@/components/tailwind-indicator";
 import { ThemeProvider } from "@/components/theme-provider";
 import Script from "next/script";
 import { ServiceInspector } from "@/components/service-inspector";
+import { ToastProvider } from "@/components/ui/toast";
 
 export default function RootLayout2({
   children,
@@ -36,6 +37,7 @@ export default function RootLayout2({
               {children}
               <TailwindIndicator />
               <ServiceInspector />
+              <ToastProvider />
             </MSALWrapper>
           </MagicboxProvider>
         </ThemeProvider>

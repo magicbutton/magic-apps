@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 import { run } from "@/koksmat/magicservices";
 import { Result } from "./httphelper";
+import { MagicboxContext } from "./magicbox-context";
 
 export const version = 1;
 
@@ -22,11 +23,14 @@ export function useService<T>(
   const [isLoading, setisLoading] = useState(false);
   const [error, seterror] = useState("");
   const [didRun, setdidRun] = useState(false);
+  const magicbox = useContext(MagicboxContext);
+
   useEffect(() => {
     const load = async () => {
       if (didRun) return;
 
       seterror("");
+      const calledTimestamp = new Date();
 
       const result = await run<T>(
         servicename,
@@ -35,6 +39,18 @@ export function useService<T>(
         timeout,
         transactionid
       );
+      magicbox.logServiceCall({
+        calledTimestamp,
+        responedTimestamp: new Date(),
+        request: {
+          args,
+          body,
+          channel: servicename,
+          timeout,
+        },
+        servicename,
+        response: result,
+      });
       setdidRun(true);
       setisLoading(false);
       if (setresult) {

@@ -7,6 +7,7 @@ import AppTopMenu from "./components/apptopmenu";
 import { MagicboxContext } from "@/koksmat/magicbox-context";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import Tracer from "@/koksmat/components/tracer";
 
 export default function Layout(props: { children: any }) {
   const { children } = props;
@@ -42,10 +43,19 @@ export default function Layout(props: { children: any }) {
     <AppProvider>
       <div className="flex bg-[#2D32A9] h-[80px]">
         <div className="hidden md:block w-14 "></div>
-        <div className="p-2 text-white font-extralight text-2xl  md:text-4xl">
-          <Link href="/apps">
-            apps.intra.nexigroup.com {/* <AppTopMenu /> */}
-          </Link>
+        <div className="p-2 text-white font-extralight text-2xl  md:text-4xl mt-3 ml-10 md:mt-2 md:ml-0 w-full">
+          <div className="flex">
+            <div>
+              <Link href="/apps">
+                apps.intra.nexigroup.com {/* <AppTopMenu /> */}
+              </Link>
+            </div>
+            <div className="grow"></div>
+            <div>
+              <div className="text-lg right-0">{magicbox?.user?.name}</div>
+              <div className="text-sm  right-0">{magicbox?.user?.email}</div>
+            </div>
+          </div>
         </div>
       </div>
       <div className="flex min-h-[calc(100vh-80px)]">
@@ -55,7 +65,9 @@ export default function Layout(props: { children: any }) {
         <div className="grow bg-slate-50 dark:bg-slate-800"></div>
         <div className="container p-8">{children}</div>
         <div className="grow  bg-slate-50  dark:bg-slate-800"></div>
-        <div className="hidden md:block"></div>
+        <div className="hidden md:block">
+          {magicbox.showTracer && <Tracer />}
+        </div>
       </div>
       <div className=""></div>
     </AppProvider>

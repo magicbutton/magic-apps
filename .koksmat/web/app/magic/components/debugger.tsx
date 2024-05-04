@@ -9,22 +9,23 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import Debugger from "@/koksmat/components/debugger";
 import { MagicboxContext } from "@/koksmat/magicbox-context";
 import { useContext } from "react";
 
-export default function Debugger() {
+export default function DebuggerSheet() {
   const magicbox = useContext(MagicboxContext);
   return (
     <div>
       <Sheet>
-        <SheetTrigger>Magic</SheetTrigger>
+        <SheetTrigger>M</SheetTrigger>
         <SheetContent>
           <SheetHeader>
             <SheetTitle>Debugger</SheetTitle>
           </SheetHeader>
-          <SheetDescription>xx</SheetDescription>
-          Service calls
-          <SheetFooter>fsdf</SheetFooter>
+
+          <Debugger />
+          <SheetFooter></SheetFooter>
         </SheetContent>
       </Sheet>
     </div>
