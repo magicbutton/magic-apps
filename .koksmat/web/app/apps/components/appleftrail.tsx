@@ -10,6 +10,7 @@ import {
   Home,
   LineChart,
   ListFilter,
+  MessageCircleQuestion,
   MoreVertical,
   Package,
   Package2,
@@ -99,6 +100,18 @@ export default function AppLeftRail(props: {}) {
               </Link>
             </TooltipTrigger>
             <TooltipContent side="right">Dashboard</TooltipContent>
+          </Tooltip>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Link
+                href="/apps/survey"
+                className="flex h-9 w-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:text-foreground md:h-8 md:w-8"
+              >
+                <MessageCircleQuestion className="h-5 w-5" />
+                <span className="sr-only">Surveys</span>
+              </Link>
+            </TooltipTrigger>
+            <TooltipContent side="right">Surveys</TooltipContent>
           </Tooltip>
           {/* <Tooltip>
             <TooltipTrigger asChild>

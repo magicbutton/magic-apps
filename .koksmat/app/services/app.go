@@ -18,6 +18,22 @@ import (
 	"github.com/nats-io/nats.go/micro"
 )
 
+func ProcessAppRequest[T interface{}](req micro.Request, process func([]string) (*T, error)) {
+
+	var payload ServiceRequest
+	_ = json.Unmarshal([]byte(req.Data()), &payload)
+	args := payload.Args[1:]
+	result, err := process(args)
+	if err != nil {
+		log.Println("Error", err)
+		ServiceResponseError(req, fmt.Sprintf("%s", err))
+
+		return
+	}
+
+	ServiceResponse(req, result)
+
+}
 func HandleAppRequests(req micro.Request) {
 
 	rawRequest := string(req.Data())
@@ -38,24 +54,9 @@ func HandleAppRequests(req micro.Request) {
 
 	// macd.2
 	case "dashboard":
-		if len(payload.Args) < 2 {
-			log.Println("Expected 2 arguments, got %d", len(payload.Args))
-			ServiceResponseError(req, "Expected 1 arguments")
-			return
-		}
-
-		result, err := app.GlobalDashboard(payload.Args[1])
-		if err != nil {
-			log.Println("Error", err)
-			ServiceResponseError(req, fmt.Sprintf("Error calling GlobalDashboard: %s", err))
-
-			return
-		}
-
-		ServiceResponse(req, result)
-
-	// macd.2
-
+		ProcessAppRequest(req, app.GlobalDashboard)
+	case "select":
+		ProcessAppRequest(req, app.Select)
 	default:
 		ServiceResponseError(req, "Unknown command")
 	}

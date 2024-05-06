@@ -39,7 +39,11 @@ func GetCount(sql string) int {
 	return count[0].Count
 }
 
-func GlobalDashboard(email string) (*models.Dashboard, error) {
+func GlobalDashboard(args []string) (*models.Dashboard, error) {
+	if len(args) < 1 {
+		return nil, fmt.Errorf("Expected 1 arguments")
+	}
+	email := args[0]
 	var person_id int = -1
 	var numberOfAppsOwned int = 0
 	var numberOfSurveyResponses int = 0
