@@ -1,12 +1,13 @@
 "use client";
 
-export interface Answers {
+export interface Questions {
   Result: Result[];
 }
 
 export interface Result {
-  truefalse1: boolean;
-  count: number;
+  displayname: string;
+  description: string;
+  truefalse1: string;
 }
 
 export const questionsSQL = (
