@@ -1,8 +1,8 @@
 {
   "version": {
     "minor": 0,
-    "build": 10,
-    "patch": 10,
+    "build": 12,
+    "patch": 12,
     "major": 0
   },
   "appname": "magic-apps",

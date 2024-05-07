@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { use, useEffect, useState } from "react";
 import {
   MagicboxContextType,
   MagicboxContext,
@@ -97,9 +97,17 @@ export const MagicboxProvider = ({ children }: Props) => {
     },
     showTracer: showtracer,
     setShowTracer: function (showTracer: boolean): void {
+      localStorage.setItem("showtracer", showTracer ? "true" : "false");
       setshowtracer(showTracer);
     },
   };
+
+  useEffect(() => {
+    const showtracer = localStorage.getItem("showtracer");
+    if (showtracer) {
+      setshowtracer(showtracer === "true");
+    }
+  }, []);
   return (
     <MagicboxContext.Provider value={magicbox}>
       {children}

@@ -151,7 +151,7 @@ function Questions(props: {
   }
   return (
     <div>
-      <div className="flex items-center space-x-2 mt-6">
+      <div className="flex items-center space-x-2 mt-6 mb-6">
         <Button
           variant="secondary"
           onClick={() => {
@@ -211,27 +211,31 @@ function Questions(props: {
         )}
       </div>
       <div className="hidden">{version}</div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 space-y-3 space-x-3">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 ">
         {!data && <div>Loading...</div>}
         {responses
           .sort((a, b) => a.displayname.localeCompare(b.displayname))
           .map((response, index) => {
             const timestamp = parseISO(response.responsedate);
             const days = differenceInDays(new Date(), timestamp);
-            const timestampText =
-              days > 700000
-                ? "Never answered"
-                : "answered " + days + " days ago";
+            const isNull = days > 700000;
+            const timestampText = isNull
+              ? "Never answered"
+              : "answered " + days + " days ago";
 
             return (
-              <Card key={index}>
+              <Card key={index} className="m-2">
                 <CardHeader>
                   <CardTitle>{response.displayname}</CardTitle>
                 </CardHeader>
                 <CardContent>
+                  {/* <pre>{JSON.stringify(response, null, 2)}</pre> */}
                   <YesNo
+                    type="checkbox"
+                    label={question1}
+                    isnull={isNull}
                     id={response.id.toString()}
-                    question={question1}
+                    question={""}
                     checked={response.truefalse1}
                     onChange={(value) => {
                       response.truefalse1 = value;
@@ -239,17 +243,22 @@ function Questions(props: {
                       setresponses(responses);
                     }}
                   />
-                  <YesNo
-                    id={"q2" + response.id.toString()}
-                    question={question2}
-                    checked={response.truefalse2}
-                    onChange={(value) => {
-                      response.truefalse2 = value;
-                      setversion(version + 1);
-                      setresponses(responses);
-                    }}
-                  />
-                  <div className="text-xs">{timestampText}</div>
+                  {response.truefalse1 && (
+                    <YesNo
+                      type="checkbox"
+                      label={question2}
+                      isnull={isNull}
+                      id={"q2" + response.id.toString()}
+                      question={""}
+                      checked={response.truefalse2}
+                      onChange={(value) => {
+                        response.truefalse2 = value;
+                        setversion(version + 1);
+                        setresponses(responses);
+                      }}
+                    />
+                  )}
+                  <div className="text-xs mt-4 text-right">{timestampText}</div>
                 </CardContent>
               </Card>
             );
