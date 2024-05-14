@@ -10,7 +10,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useToast } from "@/components/ui/use-toast";
-import { DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import { AlertCircle } from "lucide-react";
 
 import { parseISO, differenceInDays } from "date-fns";
 export interface Survey {
@@ -105,6 +114,8 @@ import { toast } from "@/components/ui/use-toast";
 import { ToastAction } from "@/components/ui/toast";
 import { YesNo } from "./YesNo";
 import { SendResponse } from "./SendResponse";
+import { InputText } from "./Text";
+import Question from "./question";
 
 function Questions(props: {
   owner_id: string;
@@ -114,6 +125,7 @@ function Questions(props: {
 
   question1: string;
   question2: string;
+  question3: string;
   onSubmitted?: () => void;
   surveyVersion: number;
 }) {
@@ -124,12 +136,14 @@ function Questions(props: {
     onSubmitted,
     question1,
     question2,
+    question3,
   } = props;
   const [version, setversion] = useState(0);
   const [responses, setresponses] = useState<SurveyResponse[]>([]);
   const [allanswered, setallanswered] = useState(false);
 
   const [submitting, setsubmitting] = useState(false);
+
   const submit = async () => {
     setsubmitting(true);
   };
@@ -224,43 +238,31 @@ function Questions(props: {
               : "answered " + days + " days ago";
 
             return (
-              <Card key={index} className="m-2">
-                <CardHeader>
-                  <CardTitle>{response.displayname}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {/* <pre>{JSON.stringify(response, null, 2)}</pre> */}
-                  <YesNo
-                    type="checkbox"
-                    label={question1}
-                    isnull={isNull}
-                    id={response.id.toString()}
-                    question={""}
-                    checked={response.truefalse1}
-                    onChange={(value) => {
-                      response.truefalse1 = value;
-                      setversion(version + 1);
-                      setresponses(responses);
-                    }}
-                  />
-                  {response.truefalse1 && (
-                    <YesNo
-                      type="checkbox"
-                      label={question2}
-                      isnull={isNull}
-                      id={"q2" + response.id.toString()}
-                      question={""}
-                      checked={response.truefalse2}
-                      onChange={(value) => {
-                        response.truefalse2 = value;
-                        setversion(version + 1);
-                        setresponses(responses);
-                      }}
-                    />
-                  )}
-                  <div className="text-xs mt-4 text-right">{timestampText}</div>
-                </CardContent>
-              </Card>
+              <div key={index}>
+                <Question
+                  index={index}
+                  response={response}
+                  id={response.id.toString()}
+                  title={response.displayname}
+                  question1={question1}
+                  question2={question1}
+                  question3={question3}
+                  isNull={false}
+                  timestampText={timestampText}
+                  onTrueFalse1Change={function (value: boolean): void {
+                    setversion(version + 1);
+                    response.truefalse1 = value;
+                  }}
+                  onTrueFalse2Change={function (value: boolean): void {
+                    setversion(version + 1);
+                    response.truefalse2 = value;
+                  }}
+                  onText1Change={function (value: string): void {
+                    setversion(version + 1);
+                    response.answer1 = value;
+                  }}
+                />
+              </div>
             );
           })}
       </div>
@@ -289,8 +291,10 @@ export default function ResponseSurveys(props: {
         <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">
           {survey?.displayname}
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-[650px] text-lg md:text-xl">
-          Here is a list of apps recorded as owned by{" "}
+        <p className="text-gray-500 dark:text-gray-400 p-10 text-lg md:text-xl">
+          Here is a list of application(s) we have recorded as owned by you. If
+          this is incorrect please state this for each application by entering
+          the email of the suggested owner.
         </p>
       </div>
 
@@ -302,6 +306,7 @@ export default function ResponseSurveys(props: {
           }}
           question1={survey?.truefalse1}
           question2={survey?.truefalse2}
+          question3={survey?.question1}
           owner_id={owner_id}
           survey_id={survey_id}
           responses={[]}

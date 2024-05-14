@@ -54,10 +54,6 @@ export default function Owners() {
         <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">
           Applications owners
         </h1>
-        <p className="text-gray-500 dark:text-gray-400 max-w-[650px] text-lg md:text-xl">
-          Select the applications you own from the list below. This will help us
-          verify your account and provide the best experience.
-        </p>
       </div>
       {!data && <div>Loading...</div>}
 
