@@ -51,7 +51,7 @@ export default function Owners() {
   return (
     <div>
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">
+        <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl mb-4">
           Applications owners
         </h1>
       </div>

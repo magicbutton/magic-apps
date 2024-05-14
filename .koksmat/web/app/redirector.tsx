@@ -24,8 +24,14 @@ export default function Redirector(props: { email: string }) {
     if (userInfo?.data == undefined) {
       return;
     }
-    if (userInfo.data?.Result.length !== 1) {
-      redirect("/" + APPNAME);
+    if (userInfo.data?.Result.length === 1) {
+      redirect("/apps/link/noappsforyou");
+    }
+
+    if (userInfo.data?.Result.length > 1) {
+      redirect(
+        "/" + APPNAME + "/owner/" + userInfo.data.Result[0].respondent_id
+      );
     }
 
     redirect(
