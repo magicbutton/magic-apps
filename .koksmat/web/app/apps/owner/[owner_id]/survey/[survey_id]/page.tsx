@@ -116,6 +116,7 @@ import { YesNo } from "./YesNo";
 import { SendResponse } from "./SendResponse";
 import { InputText } from "./Text";
 import Question from "./question";
+import { Data } from "../../page";
 
 function Questions(props: {
   owner_id: string;
@@ -155,6 +156,7 @@ function Questions(props: {
     600,
     "x"
   );
+
   useEffect(() => {
     if (!data) return;
 
@@ -274,6 +276,13 @@ export default function ResponseSurveys(props: {
 }) {
   const { toast } = useToast();
   const { owner_id, survey_id } = props.params;
+  const personItem = useService<Data>(
+    "magic-apps.person",
+    ["read", owner_id],
+    "",
+    600,
+    "x"
+  );
 
   const surveyItem = useService<Survey>(
     "magic-apps.survey",
@@ -292,9 +301,10 @@ export default function ResponseSurveys(props: {
           {survey?.displayname}
         </h1>
         <p className="text-gray-500 dark:text-gray-400 p-10 text-lg md:text-xl">
-          Here is a list of application(s) we have recorded as owned by you. If
-          this is incorrect please state this for each application by entering
-          the email of the suggested owner.
+          Here is a list of application(s) we have recorded as owned by{" "}
+          <b>{personItem.data?.displayname}</b>. If this is incorrect please
+          state this for each application by entering the email of the suggested
+          owner.
         </p>
       </div>
 

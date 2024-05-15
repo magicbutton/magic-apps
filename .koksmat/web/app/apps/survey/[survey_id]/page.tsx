@@ -40,8 +40,8 @@ export default function SurveyDetails(props: {
       return;
     }
 
-    const yes = answers.data?.Result.find((r) => r.truefalse1 === true)?.count;
-    const no = answers.data?.Result.find((r) => r.truefalse1 === false)?.count;
+    const yes = answers.data?.Result?.find((r) => r.truefalse1 === true)?.count;
+    const no = answers.data?.Result?.find((r) => r.truefalse1 === false)?.count;
     const unansweredCount = unanswered.data?.Result[0].unanswered;
 
     setdata([

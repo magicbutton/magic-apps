@@ -54,18 +54,18 @@ export default function Owners() {
   return (
     <div>
       <div className="space-y-4">
-        <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl">
+        <h1 className="text-2xl font-bold  sm:text-4xl md:text-5xl mb-4">
           Applications
         </h1>
       </div>
-
-      {owners.items
+      Not details for now
+      {/* {owners.items
         .sort((a, b) => a.displayname.localeCompare(b.displayname))
         .map((item, index) => (
           <div key={index}>
             <Item item={item} />
           </div>
-        ))}
+        ))} */}
     </div>
   );
 }
