@@ -247,7 +247,7 @@ function Questions(props: {
                   id={response.id.toString()}
                   title={response.displayname}
                   question1={question1}
-                  question2={question1}
+                  question2={question2}
                   question3={question3}
                   isNull={false}
                   timestampText={timestampText}
