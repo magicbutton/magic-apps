@@ -47,6 +47,7 @@ func MapSurveyOutgoing(db database.Survey) surveymodel.Survey {
         Number1 : db.Number1,
         Number2 : db.Number2,
         Number3 : db.Number3,
+        Questions : db.Questions,
 
     }
 }
@@ -82,6 +83,7 @@ func MapSurveyIncoming(in surveymodel.Survey) database.Survey {
         Number1 : in.Number1,
         Number2 : in.Number2,
         Number3 : in.Number3,
+        Questions : in.Questions,
 
     }
 }

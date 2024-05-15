@@ -6,20 +6,20 @@
             ---
             */
             //generator:  noma3.delete.v2
-            package surveyresponse
+            package importdata
             
             import (
                 "log"
             
                 "github.com/magicbutton/magic-apps/applogic"
                 "github.com/magicbutton/magic-apps/database"
-                "github.com/magicbutton/magic-apps/services/models/surveyresponsemodel"
+                "github.com/magicbutton/magic-apps/services/models/importdatamodel"
             
             )
             
-            func SurveyResponseDelete(id int) ( error) {
-                log.Println("Calling SurveyResponsedelete")
+            func ImportDataDelete(id int) ( error) {
+                log.Println("Calling ImportDatadelete")
             
-                return applogic.Delete[database.SurveyResponse, surveyresponsemodel.SurveyResponse](id)
+                return applogic.Delete[database.ImportData, importdatamodel.ImportData](id)
             
             }

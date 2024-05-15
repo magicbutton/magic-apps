@@ -6,20 +6,20 @@ keep: false
 ---
 */
 //generator:  noma3.read.v2
-package campaign
+package importdata
 
 import (
     "log"
 
     "github.com/magicbutton/magic-apps/applogic"
     "github.com/magicbutton/magic-apps/database"
-    "github.com/magicbutton/magic-apps/services/models/campaignmodel"
+    "github.com/magicbutton/magic-apps/services/models/importdatamodel"
 
 )
 
-func CampaignRead(id int) (*campaignmodel.Campaign, error) {
-    log.Println("Calling Campaignread")
+func ImportDataRead(id int) (*importdatamodel.ImportData, error) {
+    log.Println("Calling ImportDataread")
 
-    return applogic.Read[database.Campaign, campaignmodel.Campaign](id, applogic.MapCampaignOutgoing)
+    return applogic.Read[database.ImportData, importdatamodel.ImportData](id, applogic.MapImportDataOutgoing)
 
 }

@@ -243,7 +243,18 @@ entities:
         required: false
 
   # Use for storing sites, folders etc.
-
+  importdata: &importdata
+    name: importdata
+    description: Import
+    baselineattributes: *recordAttributes
+    additionalattributes:
+      - name: user
+        type: reference
+        entity: *person
+        required: true
+      - name: data
+        type: json
+        required: true
 models:
   itemMethods: &itemMethods
     - name: read
@@ -339,6 +350,15 @@ services:
       model: surveyresponse
       objectname: SurveyResponse
       entity: *surveyresponse
+    methods: *itemMethods
+
+  - name: importdata
+    description: Import data
+    entity:
+      type: record
+      model: importdata
+      objectname: ImportData
+      entity: *importdata
     methods: *itemMethods
 icons:
   ChevronLeft: &ChevronLeft

@@ -11,14 +11,14 @@ import (
 	"encoding/json"
     "fmt"
 	"log"
-    "github.com/magicbutton/magic-apps/services/endpoints/surveyresponse"
-    "github.com/magicbutton/magic-apps/services/models/surveyresponsemodel"
+    "github.com/magicbutton/magic-apps/services/endpoints/importdata"
+    "github.com/magicbutton/magic-apps/services/models/importdatamodel"
 
 	. "github.com/magicbutton/magic-apps/utils"
 	"github.com/nats-io/nats.go/micro"
 )
 
-func HandleSurveyResponseRequests(req micro.Request) {
+func HandleImportDataRequests(req micro.Request) {
 
     rawRequest := string(req.Data())
 	if rawRequest == "ping" {
@@ -47,10 +47,10 @@ if (len(payload.Args) < 2) {
 
 
     
-    result,err := surveyresponse.SurveyResponseRead(StrToInt(payload.Args[1]))
+    result,err := importdata.ImportDataRead(StrToInt(payload.Args[1]))
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling SurveyResponseRead: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling ImportDataRead: %s", err))
 
 
         return
@@ -68,7 +68,7 @@ if (len(payload.Args) < 2) {
 
 
                 // transformer v1
-            object := surveyresponsemodel.SurveyResponse{}
+            object := importdatamodel.ImportData{}
             body := ""
 
             json.Unmarshal([]byte(payload.Args[1]), &body)
@@ -76,14 +76,14 @@ if (len(payload.Args) < 2) {
     
             if err != nil {
                 log.Println("Error", err)
-                ServiceResponseError(req, "Error unmarshalling surveyresponse")
+                ServiceResponseError(req, "Error unmarshalling importdata")
                 return
             }
                      
-    result,err := surveyresponse.SurveyResponseCreate(object)
+    result,err := importdata.ImportDataCreate(object)
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling SurveyResponseCreate: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling ImportDataCreate: %s", err))
 
 
         return
@@ -101,7 +101,7 @@ if (len(payload.Args) < 2) {
 
 
                 // transformer v1
-            object := surveyresponsemodel.SurveyResponse{}
+            object := importdatamodel.ImportData{}
             body := ""
 
             json.Unmarshal([]byte(payload.Args[1]), &body)
@@ -109,14 +109,14 @@ if (len(payload.Args) < 2) {
     
             if err != nil {
                 log.Println("Error", err)
-                ServiceResponseError(req, "Error unmarshalling surveyresponse")
+                ServiceResponseError(req, "Error unmarshalling importdata")
                 return
             }
                      
-    result,err := surveyresponse.SurveyResponseUpdate(object)
+    result,err := importdata.ImportDataUpdate(object)
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling SurveyResponseUpdate: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling ImportDataUpdate: %s", err))
 
 
         return
@@ -133,10 +133,10 @@ if (len(payload.Args) < 2) {
 }
 
 
-            err :=  surveyresponse.SurveyResponseDelete(StrToInt(payload.Args[1]))
+            err :=  importdata.ImportDataDelete(StrToInt(payload.Args[1]))
             if (err != nil) {
                 log.Println("Error", err)
-                ServiceResponseError(req, fmt.Sprintf("Error calling SurveyResponseDelete: %s", err))
+                ServiceResponseError(req, fmt.Sprintf("Error calling ImportDataDelete: %s", err))
 
 
                 return
@@ -153,10 +153,10 @@ if (len(payload.Args) < 2) {
 
 
     
-    result,err := surveyresponse.SurveyResponseSearch(payload.Args[1])
+    result,err := importdata.ImportDataSearch(payload.Args[1])
     if (err != nil) {
         log.Println("Error", err)
-        ServiceResponseError(req, fmt.Sprintf("Error calling SurveyResponseSearch: %s", err))
+        ServiceResponseError(req, fmt.Sprintf("Error calling ImportDataSearch: %s", err))
 
 
         return

@@ -21,14 +21,17 @@ export default function Redirector(props: { email: string }) {
   );
 
   useEffect(() => {
+    if (userInfo === undefined) return;
     if (userInfo?.data == undefined) {
       return;
     }
-    if (userInfo.data?.Result.length === 1) {
+
+    const items = userInfo?.data?.Result ?? [];
+    if (items.length < 1) {
       redirect("/apps/link/noappsforyou");
     }
 
-    if (userInfo.data?.Result.length > 1) {
+    if (items.length > 1) {
       redirect(
         "/" + APPNAME + "/owner/" + userInfo.data.Result[0].respondent_id
       );
@@ -38,11 +41,11 @@ export default function Redirector(props: { email: string }) {
       "/" +
         APPNAME +
         "/owner/" +
-        userInfo.data.Result[0].respondent_id +
+        items[0].respondent_id +
         "/survey/" +
-        userInfo.data.Result[0].survey_id
+        items[0].survey_id
     );
-  }, [userInfo]);
+  }, [userInfo.data]);
   return (
     <div>
       {userInfo.error && <div className="text-red-500">{userInfo.error}</div>}
