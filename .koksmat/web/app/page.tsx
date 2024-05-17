@@ -1,27 +1,41 @@
 "use client";
 
-import { APPNAME } from "@/app/global";
 import { MagicboxContext } from "@/koksmat/magicbox-context";
-import { useService } from "@/koksmat/useservice";
-import { redirect } from "next/navigation";
 import { useContext, useEffect } from "react";
-import { Dashboard } from "./apps/page";
-import { useSQLSelect } from "@/koksmat/usesqlselect";
 import Redirector from "./redirector";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const magicbox = useContext(MagicboxContext);
-  const userInfo = useSQLSelect<any>(
-    "magic-apps.app",
-    "SELECT * FROM dashboard WHERE person_id = 1"
-  );
 
   useEffect(() => {
-    return;
+    console.log("magicbox", magicbox.user);
+    //redirect("/" + APPNAME);
+  }, [magicbox.user]);
+  if (!magicbox.user) {
+    return (
+      <div className="flex h-screen">
+        <div className="grow"></div>
+        <div className="flex flex-col">
+          <div className="grow"></div>
+          <div>
+            {" "}
+            <Button
+              onClick={async () => {
+                const signedIn = await magicbox.signIn(["User.Read"], "");
 
-    redirect("/" + APPNAME);
-  }, []);
-
+                magicbox.refresh();
+              }}
+            >
+              Sign In using Microsoft 365 account
+            </Button>
+          </div>
+          <div className="grow"></div>
+        </div>
+        <div className="grow"></div>
+      </div>
+    );
+  }
   return (
     <div>
       {magicbox.user?.email && <Redirector email={magicbox.user.email} />}

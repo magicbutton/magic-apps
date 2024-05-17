@@ -1,6 +1,6 @@
 "use client";
 
-import { use, useEffect, useState } from "react";
+import { use, useEffect, useMemo, useState } from "react";
 import {
   MagicboxContextType,
   MagicboxContext,
@@ -26,9 +26,10 @@ export const MagicboxProvider = ({ children }: Props) => {
   const [authSource, setauthSource] = useState<AuthSource>("");
   const [pca, setpca] = useState<IPublicClientApplication>();
   const [transactionId, settransactionId] = useState("");
-  const [servicecalllog, setservicecalllog] = useState<ServiceCallLogEntry[]>(
-    []
-  );
+  const servicecalllog = useMemo<ServiceCallLogEntry[]>(() => {
+    return [];
+  }, []);
+
   const [showtracer, setshowtracer] = useState(false);
   const magicbox: MagicboxContextType = {
     session,
@@ -90,10 +91,12 @@ export const MagicboxProvider = ({ children }: Props) => {
     transactionId,
     servicecalllog,
     logServiceCall: function (request: ServiceCallLogEntry): void {
-      setservicecalllog([request, ...servicecalllog]);
+      servicecalllog.push(request);
+      setversion(version + 1);
     },
     clearServiceCallLog: function (): void {
-      setservicecalllog([]);
+      servicecalllog.splice(0, servicecalllog.length);
+      setversion(version + 1);
     },
     showTracer: showtracer,
     setShowTracer: function (showTracer: boolean): void {
