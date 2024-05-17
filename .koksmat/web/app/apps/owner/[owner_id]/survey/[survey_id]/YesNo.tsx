@@ -19,23 +19,27 @@ export function YesNo(props: {
   switch (props.type) {
     case "radio":
       control = (
-        <RadioGroup
-          // value={props.isnull ? "" : checked ? "yes" : "no"}
-          className="flex"
-          defaultValue={props.isnull ? "" : checked ? "yes" : "no"}
-          onValueChange={(value) => {
-            onChange(value === "yes");
-          }}
-        >
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="yes" id="option-yes" />
-            <Label htmlFor="option-yes">Yes</Label>
-          </div>
-          <div className="flex items-center space-x-2">
-            <RadioGroupItem value="no" id="option-no" />
-            <Label htmlFor="option-no">No</Label>
-          </div>
-        </RadioGroup>
+        <div>
+          {" "}
+          <div className="mb-3">{label}</div>
+          <RadioGroup
+            // value={props.isnull ? "" : checked ? "yes" : "no"}
+            className="flex"
+            value={props.isnull ? "" : checked ? "yes" : "no"}
+            onValueChange={(value) => {
+              onChange(value === "yes");
+            }}
+          >
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="yes" id="option-yes" />
+              <Label htmlFor="option-yes">Yes</Label>
+            </div>
+            <div className="flex items-center space-x-2">
+              <RadioGroupItem value="no" id="option-no" />
+              <Label htmlFor="option-no">No</Label>
+            </div>
+          </RadioGroup>
+        </div>
       );
       break;
     case "checkbox":

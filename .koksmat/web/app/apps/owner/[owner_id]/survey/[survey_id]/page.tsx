@@ -127,6 +127,7 @@ function Questions(props: {
   question1: string;
   question2: string;
   question3: string;
+  question4: string;
   onSubmitted?: () => void;
   surveyVersion: number;
 }) {
@@ -138,6 +139,7 @@ function Questions(props: {
     question1,
     question2,
     question3,
+    question4,
   } = props;
   const [version, setversion] = useState(0);
   const [responses, setresponses] = useState<SurveyResponse[]>([]);
@@ -172,7 +174,7 @@ function Questions(props: {
           variant="secondary"
           onClick={() => {
             responses.map((response) => {
-              response.truefalse1 = true;
+              response.truefalse3 = true;
             });
 
             setversion(version + 1);
@@ -186,6 +188,8 @@ function Questions(props: {
           onClick={() => {
             responses.map((response) => {
               response.truefalse1 = false;
+              response.truefalse2 = false;
+              response.truefalse3 = false;
             });
 
             setversion(version + 1);
@@ -249,15 +253,26 @@ function Questions(props: {
                   question1={question1}
                   question2={question2}
                   question3={question3}
+                  question4={question4}
                   isNull={false}
                   timestampText={timestampText}
+                  // Has this app been tested on Windows 11?
                   onTrueFalse1Change={function (value: boolean): void {
                     setversion(version + 1);
+                    if (!value) {
+                      response.truefalse2 = false;
+                    }
                     response.truefalse1 = value;
                   }}
+                  // Did you find any issues?
                   onTrueFalse2Change={function (value: boolean): void {
                     setversion(version + 1);
                     response.truefalse2 = value;
+                  }}
+                  // Is this application relevant for our Windows 11 upgrade compatibilty test?
+                  onTrueFalse3Change={function (value: boolean): void {
+                    setversion(version + 1);
+                    response.truefalse3 = value;
                   }}
                   onText1Change={function (value: string): void {
                     setversion(version + 1);
@@ -317,6 +332,7 @@ export default function ResponseSurveys(props: {
           question1={survey?.truefalse1}
           question2={survey?.truefalse2}
           question3={survey?.question1}
+          question4={survey?.truefalse3}
           owner_id={owner_id}
           survey_id={survey_id}
           responses={[]}
